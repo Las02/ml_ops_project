@@ -1,12 +1,7 @@
-# ml_ops_project
+#  Project description
 
-Ml ops project, Group 47
-
-This project focuses on developing a machine translation model for English-to-Danish language pairs by fine-tuning the pre-trained T5 (Text-to-Text Transfer Transformer) model. Leveraging the OPUS dataset, which provides a rich repository of aligned English-Danish sentence pairs, we aim to enhance the model's translation capabilities through domain-specific fine-tuning.
-
-The project employs the Hugging Face Transformers framework to streamline the model training pipeline, encompassing data preprocessing, model optimization, and evaluation. We emphasize using standard metrics, such as BLEU and ROUGE scores, to assess translation quality and ensure robust performance.
-
-By tailoring a state-of-the-art transformer model for bilingual translation, this project aims to contribute to the growing field of machine translation by demonstrating an effective workflow for adapting pre-trained models to specific language tasks.
+This project focuses on developing a machine translation model for English-to-Danish language translation by fine-tuning the pre-trained T5 (Text-to-Text Transfer Transformer) model. We will use the OPUS dataset for fine-tuning the model. The OPUS dataset provides a rich repository of aligned English-Danish sentence pairs.
+We intend to use the Hugging Face Transformers framework to streamline the model training pipeline. 
 
 # Installation
 ```
