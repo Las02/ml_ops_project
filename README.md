@@ -2,6 +2,8 @@
 
 Ml ops project, Group 47
 
+In this project we aim to create a translator-model that is able to translate from English to Danish.
+We're going to fine-tune the pre-trained model T5 with the OPUS-dataset. This dataset contains danish-english sentence pairs (https://opus.nlpl.eu/). In order to accomplish this, we will utilize the the transformers framework from huggingface (https://github.com/huggingface/transformers). 
 
 
 # Installation
