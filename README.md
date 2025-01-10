@@ -1,7 +1,11 @@
 #  Project description
 
-This project focuses on developing a machine translation model for English-to-Danish language translation by fine-tuning the pre-trained T5 (Text-to-Text Transfer Transformer) model. We will use the OPUS dataset for fine-tuning the model. The OPUS dataset provides a rich repository of aligned English-Danish sentence pairs.
-We intend to use the Hugging Face Transformers framework to streamline the model training pipeline. 
+This project focuses on developing a machine learning translation model for English-to-Danish language translation by fine-tuning a pre-trained T5 (Text-to-Text Transfer Transformer) model. 
+The T5 models are encoder-decoder models developed by Google. Unlike many models that specialize in specific tasks, T5 reframes all NLP tasks—such as translation, summarization, and question answering—as a text-to-text problem. This means both the input and output are always treated as text strings, making it highly adaptable across tasks. 
+We will use the OPUS project's data for fine-tuning the model. The OPUS project is an open source project providing translated text from the internet. Here we will use the subset of the dataset containg English-to-Danish translations. This dataset consists of 52 million sentences which tokenized results in about 700 million danish and english tokens. Due to the size of the dataset we will start by working with a subsample of the dataset, and ideally later expand to the full dataset if time allows for it.
+We intend to use the Hugging Face Transformers framework to streamline the model training pipeline. The Hugging face Transformers framework provides tools to more easily work with pretrained transformers model, for tasks such as NLP, Audio classification and translation. The Transformers framework work with various deep learning frameworks including Pytorch which we plan on using for this project.  
+While one of our goals of the project is to produce a model which is capable of basic translation from English-to-Danish, our main goal in this project is the Machine Learning Operations aspect of developing the model. Meaning that our metric of success is not the performance of the model but rather the quality of the code, the reproducibility of our experiments and how well we have utilized the tools learned in the course. This involves using version control systems to organize our progress during the group work, and lastly be able to efficiently implement machine learning models locally and in the cloud. 
+
 
 # Installation
 ```
