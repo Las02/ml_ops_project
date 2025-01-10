@@ -2,6 +2,13 @@
 
 Ml ops project, Group 47
 
+# Installation
+```
+conda create -n ml_ops 'python==3.11'
+conda activate ml_ops
+pip install -e .
+```
+
 ## Project structure
 
 The directory structure of the project looks like this:
