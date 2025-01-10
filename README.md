@@ -2,8 +2,6 @@
 
 Ml ops project, Group 47
 
-beneD was here
-
 # Installation
 ```
 conda create -n ml_ops 'python==3.11'
