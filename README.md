@@ -4,7 +4,7 @@ Ml ops project, Group 47
 
 # Installation
 ```
-conda create -n ml_ops 'python==3.11'
+conda create -n ml_ops 'python==3.12.2'
 conda activate ml_ops
 pip install -e .
 ```
