@@ -34,7 +34,7 @@ class preprocess_data:
         return (danish_all, english_all)
 
 
-dl = Opus_datalaoder("./data/raw/train.txt")
+# dl = Opus_datalaoder("./data/raw/train.txt")
 # dl.danish
 # %%
 
