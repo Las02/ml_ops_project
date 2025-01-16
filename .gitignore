@@ -1,5 +1,8 @@
 docs/site/
 
+# data 
+data/
+
 # test cache
 manual_test/
 
@@ -182,3 +185,5 @@ uv.lock
 
 # data
 ./data/raw/
+data/processed
+data/processed

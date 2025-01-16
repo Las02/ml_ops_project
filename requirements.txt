@@ -1,5 +1,6 @@
 #torch==2.3.0
 typer==0.15.1
 datasets
+loguru
 # fastapi==0.115.6
 # uvicorn==0.34.0
