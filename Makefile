@@ -1,11 +1,12 @@
 test_encode:
 	pytest  tests/test_tokenize.py --capture=no -vv
-download:
+setup_data:
+	# download data and split it
 	python src/ml_ops_project/data.py download-data
-split_data:
-	python src/ml_ops_project/data.py preprocess
+	python src/ml_ops_project/data.py split-data
 help:
 	python src/ml_ops_project/data.py --help
 test: 
 	pytest --capture=no -vv
-
+train:
+	python src/ml_ops_project/train.py train
