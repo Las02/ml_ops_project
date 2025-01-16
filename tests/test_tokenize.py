@@ -13,4 +13,25 @@ class TestTokenizer:
         assert self.tokenize_data.english[0] == "For the EEA Joint Committee"
 
     def test_tokenize_data(self):
-        assert self.tokenize_data.danish_tokenized == "På Det Blandede EØS-Udvalgs vegne"
+        assert self.tokenize_data.danish_tokenized["input_ids"][0] == [
+            276,
+            2,
+            374,
+            17,
+            272,
+            16349,
+            15,
+            262,
+            2,
+            134,
+            18,
+            1265,
+            26,
+            2165,
+            122,
+            7,
+            3,
+            162,
+            15141,
+            1,
+        ]
