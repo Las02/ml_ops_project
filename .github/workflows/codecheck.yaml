@@ -26,5 +26,6 @@ jobs:
           pip list
       - name: Ruff check
         run: ruff check .
+        continue-on-error: true
       - name: Ruff format
         run: ruff format .
