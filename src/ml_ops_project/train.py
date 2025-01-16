@@ -31,9 +31,11 @@ def none():
 
 
 @app.command()
-def train(num_epochs: int = 10):
-    # Load Model
-    model = initialize_model(load_model_config())
+def train():
+    logger.info("Starting training")
+
+    config = load_model_config()
+    model = initialize_model(config)
 
     # Set Device
     device = torch.device(
@@ -42,10 +44,8 @@ def train(num_epochs: int = 10):
 
     # Set optimizer
     optimizer = AdamW(model.parameters(), lr=5e-5)
-    config = load_model_config()
-    model = initialize_model(config)
 
-    dataset = OpusDataset("data/test_data/test_data.txt")
+    dataset = OpusDataset("data/processed/train.txt")
     train_dataloader = DataLoader(dataset, batch_size=2, shuffle=False)
 
     with wandb.init(
@@ -64,6 +64,7 @@ def train(num_epochs: int = 10):
                     "epoch": epoch,
                 }
             )
+            logger.info(f"starting: epoch: {epoch}")
             train_epoch(model, optimizer, dataset, train_dataloader)
 
 
@@ -81,9 +82,8 @@ def train_epoch(model, optimizer, dataset, dataloader):
         # Remove "<pad>" from preds
         preds_decoded = dataset.decode(preds)
         preds_decoded = [pred.replace("<pad>", "") for pred in preds_decoded]
-        print(preds_decoded)
 
-        logger.info("TRAIN SUCCESS")
+        logger.info(f"loss {loss}")
         wandb.log({"loss": loss})
 
 
