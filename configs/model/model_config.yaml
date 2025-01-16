@@ -1,5 +1,3 @@
-# configs/t5_small_config.yaml
-
 model_name: "t5-small"
 vocab_size: 32128
 d_model: 512
