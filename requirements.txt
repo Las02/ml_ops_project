@@ -1,9 +1,7 @@
-torch
+torch==2.3.0
 typer==0.15.1
-datasets
+datasets==3.2.0
 loguru
-pytest
-transformers==4.48.0
-sentencepiece==0.2.0
+transformers==4.47.1
 # fastapi==0.115.6
 # uvicorn==0.34.0
