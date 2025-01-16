@@ -11,8 +11,8 @@ class TestTokenizer:
         assert len(self.tokenize_data.english) == 8
 
     def test_read_data_input(self):
-        assert self.tokenize_data.danish[0] == "På Det Blandede EØS-Udvalgs vegne"
-        assert self.tokenize_data.english[0] == "For the EEA Joint Committee"
+        assert self.tokenize_data.danish[5] == "- Men hun siger nej."
+        assert self.tokenize_data.english[5] == "But she's turned him down."
 
     def test_tokenize_data(self):
         # Assert tokenizer but ignore zero padding
@@ -44,7 +44,7 @@ def test_dataloader():
     dataset = OpusDataset("data/test_data/test_data.txt")
     train_dataloader = DataLoader(dataset, batch_size=1, shuffle=False)
     # Assert input is correct
-    assert [x for x in next(iter(train_dataloader))[0][0].tolist() if x != 0] == [
+    assert [x for x in next(iter(train_dataloader))[1][0].tolist() if x != 0] == [
         276,
         2,
         374,
@@ -66,3 +66,10 @@ def test_dataloader():
         15141,
         1,
     ]
+
+
+def test_dataloader_detokenize():
+    dataset = OpusDataset("data/test_data/test_data.txt")
+    train_dataloader = DataLoader(dataset, batch_size=1, shuffle=False)
+    breakpoint()
+    dataset.decode(next(iter(train_dataloader))[1])
