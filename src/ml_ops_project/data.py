@@ -1,4 +1,5 @@
 from pathlib import Path
+
 import typer
 from datasets import load_dataset
 from loguru import logger
@@ -26,10 +27,12 @@ class Tokenize_data:
         # Normalize data
         normalizer = Sequence([Replace("å", "aa"), Replace("ø", "oe"), Replace("æ", "ae"), Lowercase()])
         self.tokenizer.normalizer = normalizer
+        logger.info("Tokenizing data")
         self.danish_tokenized = self.tokenizer(self.danish, return_tensors=self.return_tensors, padding=self.padding)
         self.english_tokenized = self.tokenizer(self.english, return_tensors=self.return_tensors, padding=self.padding)
 
     def read_in_file(self, preprocess_data_path: Path):
+        logger.info(f"Reading in data from {preprocess_data_path}")
         # Read in the files and split them into danish and english
         danish_all = []
         english_all = []
