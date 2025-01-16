@@ -1,7 +1,7 @@
 import subprocess
 import pytest
 from transformers import T5Config, T5Tokenizer, T5ForConditionalGeneration
-from src.ml_ops_project.model import load_model_config, initialize_model
+from ml_ops_project.model import load_model_config, initialize_model
 
 def test_config_loads():
     """
