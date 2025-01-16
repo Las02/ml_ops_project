@@ -37,18 +37,18 @@ class Tokenize_data:
 
 # split_data by BM :.))
 @app.command()
-def split_data(test_percent: float = 0.2) -> None:
-    """Split train.txt into preprocessed/train.txt and preprocessed/test.txt."""
-    with open("data/raw/train.txt", "r") as f:
+def split_data(raw_path: str = "data/raw", processed_path: str = "data/processed", test_percent: float = 0.2) -> None:
+    """Split train.txt into processed/train.txt and processed/test.txt."""
+    with open(f"{raw_path}/train.txt", "r") as f:
         lines = f.readlines()
 
     n = len(lines)
     test_n = int(n * test_percent)
 
-    with open("data/processed/train.txt", "w") as f:
+    with open(f"{processed_path}/train.txt", "w") as f:
         f.writelines(lines[test_n:])
 
-    with open("data/processed/test.txt", "w") as f:
+    with open(f"{processed_path}/test.txt", "w") as f:
         f.writelines(lines[:test_n])
 
 
