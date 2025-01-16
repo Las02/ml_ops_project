@@ -24,7 +24,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install ruff black mypy
+          pip install ruff black mypy autotyping
 
       - name: Lint and fix with Ruff
         run: ruff check . --fix
@@ -35,3 +35,12 @@ jobs:
 
       - name: Static type checking with MyPy
         run: mypy .
+
+      - name: Automatically add missing type annotations with Autotyping
+        run: autotyping --path .
+
+      - name: Install autotyping
+        run: pip install autotyping
+
+      - name: Automatically add missing type annotations
+        run: autotyping --path .
