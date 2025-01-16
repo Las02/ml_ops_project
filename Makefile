@@ -8,5 +8,5 @@ help:
 	python src/ml_ops_project/data.py --help
 test: 
 	pytest --capture=no -vv
-train 
+train:
 	python src/ml_ops_project/train.py train
