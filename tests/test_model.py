@@ -1,7 +1,7 @@
 import subprocess
 import pytest
-from transformers import T5ForConditionalGeneration, T5Config
-from ml_ops_project.model import load_model_config, initialize_model
+from transformers import T5Config, T5Tokenizer, T5ForConditionalGeneration
+from src.ml_ops_project.model import load_model_config, initialize_model
 
 def test_config_loads():
     """
@@ -29,3 +29,5 @@ def test_model_script_runs():
         text=True
     )
     assert result.returncode == 0, f"model.py failed to run:\n{result.stderr}"
+
+
