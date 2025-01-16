@@ -1,5 +1,4 @@
 from pathlib import Path
-
 import typer
 from datasets import load_dataset
 from loguru import logger
