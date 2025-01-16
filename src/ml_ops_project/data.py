@@ -5,6 +5,7 @@ import typer
 from datasets import load_dataset
 from loguru import logger
 from torch.utils.data import Dataset
+from transformers import T5ForConditionalGeneration, T5Tokenizer
 
 # from transformers import AutoTokenizer
 
@@ -14,11 +15,18 @@ app = typer.Typer()
 
 
 class Tokenize_data:
-    """preprocess data"""
+    """Tokenize data"""
+
+    return_tensors = "pt"
+    padding = True
 
     def __init__(self, preprocess_data_path: Path) -> None:
         self.data_path = preprocess_data_path
         self.danish, self.english = self.read_in_file(preprocess_data_path)
+        self.tokenizer = T5Tokenizer.from_pretrained("google-t5/t5-small")
+        self.danish_tokenized = self.tokenizer(self.danish, return_tensors=self.return_tensors, padding=self.padding)
+        # breakpoint()
+        self.english_tokenized = self.tokenizer(self.english, return_tensors=self.return_tensors, padding=self.padding)
 
     def read_in_file(self, preprocess_data_path: Path):
         danish_all = []
@@ -35,7 +43,15 @@ class Tokenize_data:
         return (danish_all, english_all)
 
 
-# split_data by BM :.))
+# from transformers import T5Tokenizer, T5ForConditionalGeneration
+# tokenizer = T5Tokenizer.from_pretrained("google-t5/t5-small")
+# tokenizer("translate English to German: How are you?”)’’’
+#
+# ‘’’
+# {'input_ids': [13959, 1566, 12, 2968, 10, 571, 33, 25, 58, 1], 'attention_mask': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]}
+
+
+# Preprocess by BM :.))
 @app.command()
 def split_data(raw_path: str = "data/raw", processed_path: str = "data/processed", test_percent: float = 0.2) -> None:
     """Split train.txt into processed/train.txt and processed/test.txt."""
