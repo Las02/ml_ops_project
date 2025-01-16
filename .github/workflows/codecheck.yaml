@@ -34,7 +34,7 @@ jobs:
         run: black .
 
       - name: Automatically add missing type annotations
-        run: autotyping --path .
+        run: autotyping .
 
       - name: Static type checking with MyPy
         run: mypy .
