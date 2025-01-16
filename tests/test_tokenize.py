@@ -44,7 +44,8 @@ def test_dataloader():
     dataset = OpusDataset("data/test_data/test_data.txt")
     train_dataloader = DataLoader(dataset, batch_size=1, shuffle=False)
     # Assert input is correct
-    assert [x for x in next(iter(train_dataloader))[0][0].tolist() if x != 0] == [
+    breakpoint()
+    assert [x for x in next(iter(train_dataloader))[1][0].tolist() if x != 0] == [
         276,
         2,
         374,
