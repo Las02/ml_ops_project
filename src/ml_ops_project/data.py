@@ -25,7 +25,7 @@ class Tokenize_data:
         self.danish, self.english = self.read_in_file(preprocess_data_path)
         self.tokenizer = T5Tokenizer.from_pretrained("google-t5/t5-small")
         self.danish_tokenized = self.tokenizer(self.danish, return_tensors=self.return_tensors, padding=self.padding)
-        breakpoint()
+        # breakpoint()
         self.english_tokenized = self.tokenizer(self.english, return_tensors=self.return_tensors, padding=self.padding)
 
     def read_in_file(self, preprocess_data_path: Path):

@@ -13,7 +13,8 @@ class TestTokenizer:
         assert self.tokenize_data.english[0] == "For the EEA Joint Committee"
 
     def test_tokenize_data(self):
-        assert self.tokenize_data.danish_tokenized["input_ids"][0] == [
+        # Assert tokenizer but ignore zero padding
+        assert [x for x in self.tokenize_data.danish_tokenized["input_ids"][0].tolist() if x != 0] == [
             276,
             2,
             374,
