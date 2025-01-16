@@ -13,7 +13,6 @@ from transformers import T5ForConditionalGeneration, T5Tokenizer, data
 
 app = typer.Typer()
 
-
 class Tokenize_data:
     """Tokenize data"""
 

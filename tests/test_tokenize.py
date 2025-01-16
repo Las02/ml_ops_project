@@ -1,7 +1,5 @@
 from torch.utils.data import DataLoader
-
 from ml_ops_project.data import OpusDataset, Tokenize_data
-
 
 class TestTokenizer:
     tokenize_data = Tokenize_data("data/test_data/test_data.txt")
