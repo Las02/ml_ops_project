@@ -1,17 +1,12 @@
 datasets==3.2.0
 loguru==0.7.3
-<<<<<<< HEAD
-transformers==4.48.0
-pyyaml==6.0.2
-sentencepiece==0.2.0
-=======
 PyYAML==6.0.2
 tokenizers==0.21.0
 torch==2.3.0
 transformers==4.47.1
 typer==0.15.1
-
->>>>>>> 0af768f883275ab1b8d18fda6fcd3dfa816b7e8a
+tqdm==4.66.4
+wandb==0.12.2
 
 # fastapi==0.115.6
 # uvicorn==0.34.0

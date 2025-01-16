@@ -188,3 +188,4 @@ uv.lock
 ./data/raw/
 data/processed
 data/processed
+wandb
