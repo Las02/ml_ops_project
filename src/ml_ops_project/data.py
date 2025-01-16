@@ -1,13 +1,14 @@
- %%
+from pathlib import Path
 
 import torch
 import typer
 from datasets import load_dataset
 from loguru import logger
 from torch.utils.data import Dataset
-from transformers import AutoTokenizer
 
-tokenizer = AutoTokenizer.from_pretrained("t5-small")
+# from transformers import AutoTokenizer
+
+# tokenizer = AutoTokenizer.from_pretrained("t5-small")
 
 app = typer.Typer()
 
@@ -34,19 +35,23 @@ class preprocess_data:
         return (danish_all, english_all)
 
 
-# dl = Opus_datalaoder("./data/raw/train.txt")
-# dl.danish
-# %%
+# Preprocess by BM :.))
+@app.command()
+def preprocess(test_percent: float = 0.2) -> None:
+    """Split train.txt into preprocessed/train.txt and preprocessed/test.txt."""
+    with open("data/raw/train.txt", "r") as f:
+        lines = f.readlines()
 
+    n = len(lines)
+    test_n = int(n * test_percent)
 
-#
-#    def preprocess(self, output_folder: Path) -> None:
-#         """Preprocess the raw data and save it to the output folder."""
+    with open("data/processed/train.txt", "w") as f:
+        for line in lines[test_n:]:
+            print(line, file=f)
 
-# def preprocess(raw_data_path: Path, output_folder: Path) -> None:
-#     print("Preprocessing data...")
-#     dataset = MyDataset(raw_data_path)
-#     dataset.preprocess(output_folder)
+    with open("data/processed/test.txt", "w") as f:
+        for line in lines[:test_n]:
+            print(line, file=f)
 
 
 @app.command()
@@ -62,10 +67,20 @@ def download_data():
             print(line, file=f)
 
 
-@app.command()
-def do_nothing():
-    pass
-
-
 if __name__ == "__main__":
     app()
+
+# class MyDataset(Dataset):
+#    """My custom dataset."""
+#
+#    def __init__(self, raw_data_path: Path) -> None:
+#        self.data_path = raw_data_path
+#
+#    def __len__(self) -> int:
+#        """Return the length of the dataset."""
+#
+#    def __getitem__(self, index: int):
+#        """Return a given sample from the dataset."""
+#
+#    def preprocess(self, output_folder: Path) -> None:
+#         """Preprocess the raw data and save it to the output folder."""
