@@ -166,7 +166,14 @@ We used the T5Tokenizer from Transformers to preprocess the dataset, ensuring th
 >
 > Answer:
 
---- question 4 fill here ---
+We used conda and pip for managing our dependencies. First you should clone the repository and cd into it. To initialize an environment based on our requirements files, on should run:
+```bash
+conda create -n ml_ops 'python==3.11'
+conda activate ml_ops
+pip install -e .
+```
+
+TO BE CONTINUED
 
 ### Question 5
 
@@ -182,7 +189,9 @@ We used the T5Tokenizer from Transformers to preprocess the dataset, ensuring th
 >
 > Answer:
 
---- question 5 fill here ---
+We initialized our project using the given cookiecutter template. We use most folders...
+
+TO BE CONTINUED
 
 ### Question 6
 
