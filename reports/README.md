@@ -143,7 +143,7 @@ s203512, s203520, s203581, s204201
 >
 > Answer:
 
-We used the third-party framework Transformers from Hugggingface in our project. We used the pretrained T5 model,
+We used the third-party framework Transformers from Hugggingface in our project. We finetuned the pretrained T5 model to translate from English to Danish. ...
 
 
 ## Coding environment
