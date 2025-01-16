@@ -1,12 +1,10 @@
 from pathlib import Path
-
-import torch
 import typer
 from datasets import load_dataset
 from loguru import logger
-from tokenizers.normalizers import NFD, Lowercase, Prepend, Replace, Sequence, StripAccents
+from tokenizers.normalizers import Lowercase, Replace, Sequence
 from torch.utils.data import Dataset
-from transformers import T5ForConditionalGeneration, T5Tokenizer, data
+from transformers import T5Tokenizer
 
 # from transformers import AutoTokenizer
 

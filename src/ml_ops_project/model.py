@@ -1,5 +1,5 @@
 import yaml
-from transformers import T5Config, T5ForConditionalGeneration, T5Tokenizer
+from transformers import T5Config, T5ForConditionalGeneration
 
 
 # Import Configuration
