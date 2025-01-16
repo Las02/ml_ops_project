@@ -5,7 +5,7 @@ import typer
 from datasets import load_dataset
 from loguru import logger
 from torch.utils.data import Dataset
-from transformers import T5ForConditionalGeneration, T5Tokenizer, data
+from transformers import T5ForConditionalGeneration, T5Tokenizer
 
 # from transformers import AutoTokenizer
 
@@ -64,21 +64,16 @@ from torch.utils.data import Dataset
 
 
 class OpusDataset(Dataset):
-    """Opus dataset dataloader"""
+    """My custom dataset."""
 
-    def __init__(self, data_path: Path) -> None:
-        self.data_path = data_path
-        self.tokenize_data = Tokenize_data(self.data_path)
+    def __init__(self, raw_data_path: Path) -> None:
+        self.data_path = raw_data_path
 
     def __len__(self) -> int:
         """Return the length of the dataset."""
-        return len(self.tokenize_data.danish)
 
     def __getitem__(self, index: int):
         """Return a given sample from the dataset."""
-        input = self.tokenize_data.danish_tokenized["input_ids"][index]
-        truth = self.tokenize_data.english_tokenized["input_ids"][index]
-        return truth, input
 
 
 @app.command()
