@@ -35,9 +35,9 @@ class preprocess_data:
         return (danish_all, english_all)
 
 
-# Preprocess by BM :.))
+# split_data by BM :.))
 @app.command()
-def preprocess(test_percent: float = 0.2) -> None:
+def split_data(test_percent: float = 0.2) -> None:
     """Split train.txt into preprocessed/train.txt and preprocessed/test.txt."""
     with open("data/raw/train.txt", "r") as f:
         lines = f.readlines()
@@ -46,12 +46,10 @@ def preprocess(test_percent: float = 0.2) -> None:
     test_n = int(n * test_percent)
 
     with open("data/processed/train.txt", "w") as f:
-        for line in lines[test_n:]:
-            print(line, file=f)
+        f.writelines(lines[test_n:])
 
     with open("data/processed/test.txt", "w") as f:
-        for line in lines[:test_n]:
-            print(line, file=f)
+        f.writelines(lines[:test_n])
 
 
 @app.command()
