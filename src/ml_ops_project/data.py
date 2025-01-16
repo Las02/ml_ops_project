@@ -76,9 +76,9 @@ class OpusDataset(Dataset):
 
     def __getitem__(self, index: int):
         """Return a given sample from the dataset."""
-        pred = self.tokenize_data.danish_tokenized["input_ids"][index]
-        data = self.tokenize_data.english_tokenized["input_ids"][index]
-        return pred, data
+        input = self.tokenize_data.danish_tokenized["input_ids"][index]
+        truth = self.tokenize_data.english_tokenized["input_ids"][index]
+        return truth, input
 
 
 @app.command()
