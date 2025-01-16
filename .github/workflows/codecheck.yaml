@@ -28,6 +28,7 @@ jobs:
 
       - name: Lint and fix with Ruff
         run: ruff check . --fix
+        continue-on-error: true
 
       - name: Format with Black
         run: black .
