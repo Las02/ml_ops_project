@@ -3,7 +3,7 @@ test_encode:
 setup_data:
 	# download data and split it
 	python src/ml_ops_project/data.py download-data
-	python src/ml_ops_project/data.py split_data
+	python src/ml_ops_project/data.py split-data
 help:
 	python src/ml_ops_project/data.py --help
 test: 
