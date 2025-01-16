@@ -2,7 +2,7 @@ import yaml
 from transformers import T5Config, T5Tokenizer, T5ForConditionalGeneration
 
 # Import Configuration
-def load_model_config(config_path="configs/t5_small_config.yaml"):
+def load_model_config(config_path="configs/model/model_config.yaml"):
     with open(config_path, "r") as file:
         config_dict = yaml.safe_load(file)
     return T5Config(**config_dict)
