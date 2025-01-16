@@ -16,12 +16,20 @@ from transformers import (
 from ml_ops_project.data import OpusDataset, Tokenize_data
 from ml_ops_project.model import *
 from ml_ops_project.model import initialize_model, load_model_config
+from tqdm.auto import tqdm
+import torch 
+from torch.optim import AdamW
 
 # Load Model
 model = initialize_model(load_model_config())
 
-# Load Data
+# Set Device
+device = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
 
+# Set optimizer
+optimizer = AdamW(model.parameters(), lr=5e-5)
+
+# Load Data
 app = typer.Typer()
 
 
@@ -29,27 +37,37 @@ app = typer.Typer()
 def none():
     pass
 
-
 @app.command()
-def train():
+
+def train(num_epochs: int = 10):
     config = load_model_config()
     model = initialize_model(config)
 
     dataset = OpusDataset("data/test_data/test_data.txt")
     train_dataloader = DataLoader(dataset, batch_size=2, shuffle=False)
 
-    for truth, input in train_dataloader:
-        out = model(input_ids=input, labels=truth)
-        preds = F.softmax(out.logits, dim=-1).argmax(dim=-1)
+    model.train()
+    for epoch in tqdm(range(num_epochs)):
+        for truth, input in train_dataloader:
+            outputs = model(input_ids=input, labels=truth)
+            preds = F.softmax(outputs.logits, dim=-1).argmax(dim=-1)
 
-        # To translate back
-        print(dataset.decode(preds))
-        logger.info("TRAIN SUCCESS")
-        break
+            loss = outputs.loss
+            loss.backward()
+
+            optimizer.step()
+            optimizer.zero_grad()
+
+            # Remove "<pad>" from preds
+            preds_decoded = dataset.decode(preds)
+            preds_decoded = [pred.replace("<pad>", "") for pred in preds_decoded]
+            print(preds_decoded)
+
+            logger.info("TRAIN SUCCESS")
+            break
 
 
 # %%
-
 
 #
 # # Import Configuration
