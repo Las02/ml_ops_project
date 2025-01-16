@@ -13,7 +13,7 @@ from torch.utils.data import Dataset
 app = typer.Typer()
 
 
-class preprocess_data:
+class Tokenize_data:
     """preprocess data"""
 
     def __init__(self, preprocess_data_path: Path) -> None:
