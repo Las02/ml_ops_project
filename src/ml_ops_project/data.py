@@ -4,6 +4,7 @@ import torch
 import typer
 from datasets import load_dataset
 from loguru import logger
+from tokenizers.normalizers import NFD, Lowercase, Prepend, Replace, Sequence, StripAccents
 from torch.utils.data import Dataset
 from transformers import T5ForConditionalGeneration, T5Tokenizer, data
 
@@ -24,6 +25,9 @@ class Tokenize_data:
         self.data_path = preprocess_data_path
         self.danish, self.english = self.read_in_file(preprocess_data_path)
         self.tokenizer = T5Tokenizer.from_pretrained("google-t5/t5-small")
+        # Normalize data
+        normalizer = Sequence([Replace("å", "aa"), Replace("ø", "oe"), Replace("æ", "ae"), Lowercase()])
+        self.tokenizer.normalizer = normalizer
         self.danish_tokenized = self.tokenizer(self.danish, return_tensors=self.return_tensors, padding=self.padding)
         self.english_tokenized = self.tokenizer(self.english, return_tensors=self.return_tensors, padding=self.padding)
 
@@ -69,6 +73,9 @@ class OpusDataset(Dataset):
     def __init__(self, data_path: Path) -> None:
         self.data_path = data_path
         self.tokenize_data = Tokenize_data(self.data_path)
+
+    def decode(self, tokens: list[list]):
+        return [self.tokenize_data.tokenizer.decode(x) for x in tokens]
 
     def __len__(self) -> int:
         """Return the length of the dataset."""
