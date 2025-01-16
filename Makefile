@@ -1,3 +1,5 @@
+test_encode:
+	pytest  tests/test_tokenize.py --capture=no -vv
 download:
 	python src/ml_ops_project/data.py download-data
 split_data:
@@ -5,5 +7,5 @@ split_data:
 help:
 	python src/ml_ops_project/data.py --help
 test: 
-	pytest
+	pytest --capture=no -vv
 

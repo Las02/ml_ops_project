@@ -1,0 +1,19 @@
+model_name: "t5-small"
+vocab_size: 32128
+d_model: 512
+d_kv: 64
+d_ff: 2048
+num_layers: 6
+num_decoder_layers: null  # Uses num_layers if null
+num_heads: 8
+relative_attention_num_buckets: 32
+relative_attention_max_distance: 128
+dropout_rate: 0.1
+classifier_dropout: 0.0
+layer_norm_epsilon: 1e-6
+initializer_factor: 1.0
+feed_forward_proj: "relu"
+is_encoder_decoder: true
+use_cache: true
+pad_token_id: 0
+eos_token_id: 1
