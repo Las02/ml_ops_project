@@ -11,8 +11,7 @@ def load_model_config(config_path="configs/model/model_config.yaml"):
 
 # Load model
 def initialize_model(config):
-    model = T5ForConditionalGeneration(config)
-    model.from_pretrained("google-t5/t5-small")
+    model = T5ForConditionalGeneration(config).from_pretrained("google-t5/t5-small")
     return model
 
 
