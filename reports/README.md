@@ -243,9 +243,9 @@ We've implemented a total of 8 tests using pytest. The tests focus on ensuring t
 >
 > Answer:
 
-The total code coverage is 75%, 
+The total code coverage is 74%, meaning that most of our code is tested. We could probably expand some test to include more lines of code, but we can see from the coverage report that the most important feautures are tested. 
 
-Even with a near 100% code coverage it is not certain that the code would be error free. As the code coverage report how many lines of code are run when your tests are executed, it would still be possible to have errors. But it is a good indicator that the code is thoroughly tested for potential bugs.
+Even with a near 100% code coverage it is not certain that the code would be error free. As the code coverage report how many lines of code are run when your tests are executed, it would still be possible to have errors hidden somewhere. But it is a good indicator that the code is thoroughly tested for potential bugs.
 
 
 ### Question 9
@@ -298,7 +298,14 @@ This versioning would enable us to rerun experiments with the correct dataset ve
 >
 > Answer:
 
---- question 11 fill here ---
+We have organized our continuous integration into several YAML files, each focused on a specific aspect of the development process: codecheck, pre_commit, and tests. The continuous integration is implemented using GitHub actions such that tests are automatically executed on code changes.
+
+The codecheck workflow ensures that the code is consistently linted, formatted, and documented. It identifies code style issues and potential errors, aligning with the standards defined in our project. We carefully sequence the execution of the packages to ensure they support and complement each other throughout the process
+
+The pre_commit workflow runs the pre-commit hooks as defined in the pre-commit-config.yaml. This automates tasks such as fixing common formatting issues, checking for unnecessary trailing whitespaces, and verifying other code quality standards before each commit is made.
+
+The tests workflow is set up to run our unit tests and integration tests. We test across multiple operating systems (macOS, Ubuntu, and Windows) to ensure compatibility with different environments. We also specify that Python 3.11 is the version we use, and all testing is done exclusively with this version to maintain consistency. 
+Additionally, we use caching during the installation of dependencies by leveraging the pip cache. This helps speed up the installation process by reusing previously downloaded dependencies, significantly reducing CI run times.
 
 ## Running code and tracking experiments
 

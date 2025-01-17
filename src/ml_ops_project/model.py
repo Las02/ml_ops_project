@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import yaml
 from loguru import logger
 from transformers import T5Config, T5ForConditionalGeneration
@@ -12,6 +14,7 @@ def load_model_config(config_path="configs/model/model_config.yaml"):
 
 # Load model
 def initialize_model(config):
+    Path("models/").mkdir(exist_ok=True)
     logger.info("Loading model")
     model = T5ForConditionalGeneration(config).from_pretrained("google-t5/t5-small")
     return model
