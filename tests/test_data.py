@@ -8,8 +8,8 @@
 #     dataset = MyDataset("data/raw")
 #     assert isinstance(dataset, Dataset)
 
-import pytest 
 from src.ml_ops_project.data import split_data
+
 
 def create_tmp_data(file_path, num_lines):
     """Create tmp data for testing."""
@@ -17,9 +17,10 @@ def create_tmp_data(file_path, num_lines):
         for i in range(num_lines):
             f.write(f"line {i}\n")
 
+
 def test_split_data(tmp_path):
-    """ Test split into training/test data according to percentage argument."""
-    
+    """Test split into training/test data according to percentage argument."""
+
     # create tmp data
     raw_path = tmp_path / "raw"
     processed_path = tmp_path / "processed"
