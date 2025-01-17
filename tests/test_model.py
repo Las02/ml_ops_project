@@ -1,8 +1,6 @@
 import subprocess
 
-import pytest
-from loguru import logger
-from transformers import T5Config, T5ForConditionalGeneration, T5Tokenizer
+from transformers import T5Config, T5ForConditionalGeneration
 
 from ml_ops_project.model import initialize_model, load_model_config
 
@@ -30,5 +28,7 @@ def test_model_script_runs():
     """
     Runs the model.py script in a subprocess to ensure it completes without errors.
     """
-    result = subprocess.run(["python", "src/ml_ops_project/model.py"], capture_output=True, text=True)
+    result = subprocess.run(
+        ["python", "src/ml_ops_project/model.py"], capture_output=True, text=True
+    )
     assert result.returncode == 0, f"model.py failed to run:\n{result.stderr}"

@@ -1,23 +1,15 @@
 import torch
 import torch.nn.functional as F
 import typer
-import yaml
 from loguru import logger
 from torch.optim import AdamW
 
 # %%
 from torch.utils.data import DataLoader
 from tqdm.auto import tqdm
-from transformers import (
-    AutoModelForSeq2SeqLM,
-    Seq2SeqTrainer,
-    Seq2SeqTrainingArguments,
-    T5ForConditionalGeneration,
-    T5Tokenizer,
-)
 
 import wandb
-from ml_ops_project.data import OpusDataset, Tokenize_data
+from ml_ops_project.data import OpusDataset
 from ml_ops_project.model import *
 from ml_ops_project.model import initialize_model, load_model_config
 
@@ -39,7 +31,11 @@ def train():
 
     # Set Device
     device = torch.device(
-        "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
+        "cuda"
+        if torch.cuda.is_available()
+        else "mps"
+        if torch.backends.mps.is_available()
+        else "cpu"
     )
 
     # Set optimizer
@@ -67,15 +63,15 @@ def train():
             )
             logger.info(f"starting: epoch: {epoch}")
             train_epoch(model, optimizer, dataset, train_dataloader)
-        
+
         torch.save(model.state_dict(), "models/model.pt")
         artifact = wandb.Artifact(
             name="ml_ops_project_model",
             type="model",
-            description="A transformer model trained to translate text (DK-EN)"
-            #metadata={"accuracy": final_accuracy, "precision": final_precision, "recall": final_recall, "f1": final_f1},
+            description="A transformer model trained to translate text (DK-EN)",
+            # metadata={"accuracy": final_accuracy, "precision": final_precision, "recall": final_recall, "f1": final_f1},
         )
-        
+
         artifact.add_file("models/model.pt")
         run.log_artifact(artifact)
 

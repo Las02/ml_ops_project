@@ -16,7 +16,9 @@ class TestTokenizer:
 
     def test_tokenize_data(self):
         # Assert tokenizer but ignore zero padding
-        assert [x for x in self.tokenize_data.danish_tokenized["input_ids"][0].tolist() if x != 0] == [
+        assert [
+            x for x in self.tokenize_data.danish_tokenized["input_ids"][0].tolist() if x != 0
+        ] == [
             276,
             2,
             374,

@@ -2,9 +2,8 @@ import torch.nn.functional as F
 
 # %%
 from torch.utils.data import DataLoader
-from transformers import T5ForConditionalGeneration, T5Tokenizer
 
-from ml_ops_project.data import OpusDataset, Tokenize_data
+from ml_ops_project.data import OpusDataset
 from ml_ops_project.model import *
 
 config = load_model_config()
