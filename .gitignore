@@ -193,3 +193,5 @@ data/processed
 data/processed
 wandb
 data/cache
+data/raw
+data/raw
