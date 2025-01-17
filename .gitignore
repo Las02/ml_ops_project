@@ -192,3 +192,4 @@ uv.lock
 data/processed
 data/processed
 wandb
+data/cache

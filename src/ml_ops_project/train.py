@@ -45,7 +45,8 @@ def train():
     # Set optimizer
     optimizer = AdamW(model.parameters(), lr=5e-5)
 
-    dataset = OpusDataset("data/processed/train.txt")
+    # dataset = OpusDataset("data/processed/train.txt")
+    dataset = OpusDataset("data/test_data/test_data.txt")
     train_dataloader = DataLoader(dataset, batch_size=2, shuffle=False)
 
     with wandb.init(
