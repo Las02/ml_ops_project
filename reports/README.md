@@ -189,9 +189,9 @@ TO BE CONTINUED
 >
 > Answer:
 
-We initialized our project using the given cookiecutter template. We use most folders...
+We initialized our project using the given cookiecutter template in this course (https://github.com/SkafteNicki/mlops_template). We've largely followed  this standard for organizing the code in our project. However, we have removed the notebooks folder as the project doesn't involve any. 
 
-TO BE CONTINUED
+todo: delete unused folders and update this
 
 ### Question 6
 
