@@ -1,3 +1,4 @@
+import pickle
 from pathlib import Path
 
 import typer
@@ -23,13 +24,31 @@ class Tokenize_data:
     def __init__(self, preprocess_data_path: Path) -> None:
         self.data_path = preprocess_data_path
         self.danish, self.english = self.read_in_file(preprocess_data_path)
+
+        self.danish_cache_path = f"data/cache/{self.data_path.strip("/")[-1]}_danish_data.pck"
+        self.english_cache_path = f"data/cache/{self.data_path.strip("/")[-1]}_english_data.pck"
+
+        if True:
+            logger.warning(f"No cache containing tokenized data, begining tokenizing data: {preprocess_data_path}")
+            self.tokenize_data()
+
+    def tokenize_data(self):
         self.tokenizer = T5Tokenizer.from_pretrained("google-t5/t5-small")
         # Normalize data
         normalizer = Sequence([Replace("å", "aa"), Replace("ø", "oe"), Replace("æ", "ae"), Lowercase()])
         self.tokenizer.normalizer = normalizer
-        logger.info("Tokenizing data")
+
+        logger.info("Starting tokenizing danish data")
         self.danish_tokenized = self.tokenizer(self.danish, return_tensors=self.return_tensors, padding=self.padding)
+        with open(self.danish_cache_path, "wb") as f:
+            logger.info(f"Dumped danish pickle to {self.danish_cache_path}")
+            pickle.dump(self.danish_tokenized, f)
+
+        logger.info("Starting tokenizing english data")
         self.english_tokenized = self.tokenizer(self.english, return_tensors=self.return_tensors, padding=self.padding)
+        with open(self.english_cache_path, "wb") as f:
+            logger.info(f"Dumped english pickle to {self.english_cache_path}")
+            pickle.dump(self.english_tokenized, f)
 
     def read_in_file(self, preprocess_data_path: Path):
         logger.info(f"Reading in data from {preprocess_data_path}")
