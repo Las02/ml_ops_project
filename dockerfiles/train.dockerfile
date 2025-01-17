@@ -11,7 +11,6 @@ COPY requirements.txt requirements.txt
 COPY pyproject.toml pyproject.toml
 COPY src/ src/
 COPY data/ data/
-# COPY models/ models/
 COPY configs/ configs/
 COPY Makefile Makefile
 
@@ -25,7 +24,6 @@ RUN pip install . --no-deps --no-cache-dir
 
 RUN make setup_data
 
-# Entrypoint
 ENTRYPOINT ["make", "train"]
 
 

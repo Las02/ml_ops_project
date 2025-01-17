@@ -5,7 +5,7 @@ steps:
     'build',
     '.',
     '-t',
-    'europe-west9-docker.pkg.dev/$PROJECT_ID/studious-linker-447715-t9/ml_ops_train',
+    'europe-west9-docker.pkg.dev/$PROJECT_ID/ml-ops/ml_ops_train',
     '-f',
     './dockerfiles/train.dockerfile'
   ]
@@ -14,7 +14,7 @@ steps:
   id: 'Push container image'
   args: [
     'push',
-    'europe-west9-docker.pkg.dev/$PROJECT_ID/studious-linker-447715-t9/ml_ops_train'
+    'europe-west9-docker.pkg.dev/$PROJECT_ID/ml-ops/ml_ops_train'
   ]
 options:
   logging: CLOUD_LOGGING_ONLY

@@ -13,5 +13,5 @@ test:
 train:
 	# Train model
 	python src/ml_ops_project/train.py train
-build_cloud
+build_cloud:
 	gcloud builds submit --config=cloudbuild.yaml
