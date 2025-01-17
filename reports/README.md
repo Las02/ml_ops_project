@@ -243,7 +243,10 @@ We've implemented a total of 8 tests using pytest. The tests are focusing on ens
 >
 > Answer:
 
---- question 8 fill here ---
+The total code coverage is 75%, 
+
+Even with a near 100% code coverage it is not certain that the code would be error free. As the code coverage report how many lines of code are run when your tests are executed, it would still be possible to have errors. But it is a good indicator that the code is thoroughly tested for potential bugs.
+
 
 ### Question 9
 

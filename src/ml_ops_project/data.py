@@ -25,6 +25,9 @@ class Tokenize_data:
         self.danish_cache_path = Path(f"data/cache/{stripped_path}_danish_data.pck")
         self.english_cache_path = Path(f"data/cache/{stripped_path}_english_data.pck")
 
+        self.english_cache_path.parent.mkdir(exist_ok=True)
+        self.danish_cache_path.parent.mkdir(exist_ok=True)
+
         # Set up tokenizer
         self.tokenizer = T5Tokenizer.from_pretrained("google-t5/t5-small")
         # Normalize data
@@ -52,8 +55,6 @@ class Tokenize_data:
             logger.info(
                 f"Cache found at {self.english_cache_path} and {self.danish_cache_path}: loading tokens from these"
             )
-            self.english_cache_path.parent.mkdir(exist_ok=True)
-            self.danish_cache_path.parent.mkdir(exist_ok=True)
             with open(self.english_cache_path, "rb") as f:
                 self.english_tokenized = pickle.load(f)
             with open(self.danish_cache_path, "rb") as f:
@@ -158,6 +159,10 @@ class OpusDataset(Dataset):
 def download_data():
     logger.info("Downloading dataset")
     ds = load_dataset("kaitchup/opus-Danish-to-English")
+
+    # Mkdirs if not exisit to not crash
+    Path("data/raw").mkdir(exist_ok=True)
+    Path("data/processed").mkdir(exist_ok=True)
 
     with open("data/raw/train.txt", "w") as f:
         for line in ds["train"]["text"]:
