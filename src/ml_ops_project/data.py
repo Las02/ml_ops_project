@@ -160,6 +160,10 @@ def download_data():
     logger.info("Downloading dataset")
     ds = load_dataset("kaitchup/opus-Danish-to-English")
 
+    # Mkdirs if not exisit to not crash
+    Path("data/raw").mkdir(exist_ok=True)
+    Path("data/processed").mkdir(exist_ok=True)
+
     with open("data/raw/train.txt", "w") as f:
         for line in ds["train"]["text"]:
             print(line, file=f)
