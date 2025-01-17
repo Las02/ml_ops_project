@@ -4,8 +4,7 @@ import typer
 import wandb
 from loguru import logger
 from torch.optim import AdamW
-
-# %%
+import yaml
 from torch.utils.data import DataLoader
 from tqdm.auto import tqdm
 
@@ -24,6 +23,12 @@ def none():
 
 @app.command()
 def train():
+    with open("configs/train/train_config.yaml", "r") as file:
+        train_config = yaml.safe_load(file)
+
+    num_epochs = train_config["epochs"]
+    learning_rate = train_config["learning_rate"]
+
     logger.info("Starting training")
 
     config = load_model_config()
@@ -42,7 +47,7 @@ def train():
     Path("models/").mkdir(exist_ok=True)
 
     # Set optimizer
-    optimizer = AdamW(model.parameters(), lr=5e-5)
+    optimizer = AdamW(model.parameters(), lr=learning_rate)
 
     # dataset = OpusDataset("data/processed/train.txt")
     dataset = OpusDataset("data/test_data/test_data.txt")
@@ -53,8 +58,8 @@ def train():
         project="my-awesome-project",
         # track hyperparameters and run metadata
         config={
-            "learning_rate": 0.02,
-            "epochs": 10,
+            "learning_rate": learning_rate,
+            "epochs": num_epochs,
         },
     ) as run:
         config = wandb.config
