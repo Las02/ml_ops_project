@@ -57,7 +57,7 @@ def train():
             "learning_rate": 0.02,
             "epochs": 10,
         },
-    ):
+    ) as run:
         config = wandb.config
         for epoch in tqdm(range(config.epochs)):
             wandb.log(
@@ -67,6 +67,17 @@ def train():
             )
             logger.info(f"starting: epoch: {epoch}")
             train_epoch(model, optimizer, dataset, train_dataloader)
+        
+        torch.save(model.state_dict(), "models/model.pt")
+        artifact = wandb.Artifact(
+            name="ml_ops_project_model",
+            type="model",
+            description="A transformer model trained to translate text (DK-EN)",
+            metadata={"accuracy": final_accuracy, "precision": final_precision, "recall": final_recall, "f1": final_f1},
+        )
+        
+        artifact.add_file("model.pt")
+        run.log_artifact(artifact)
 
 
 def train_epoch(model, optimizer, dataset, dataloader):
