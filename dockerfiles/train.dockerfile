@@ -11,7 +11,7 @@ COPY requirements.txt requirements.txt
 COPY pyproject.toml pyproject.toml
 COPY src/ src/
 COPY data/ data/
-COPY models/ models/
+# COPY models/ models/
 COPY configs/ configs/
 COPY Makefile Makefile
 
