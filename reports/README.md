@@ -118,7 +118,7 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 1 fill here ---
+47
 
 ### Question 2
 > **Enter the study number for each member in the group**
@@ -129,7 +129,7 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 2 fill here ---
+s203512, s203520, s203581, s204201
 
 ### Question 3
 > **A requirement to the project is that you include a third-party package not covered in the course. What framework**
@@ -143,7 +143,10 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 3 fill here ---
+We used the third-party framework Transformers from Hugggingface in our project. We finetuned the pretrained T5 model to translate from English to Danish. The framework made it easy to access and work with the T5 model, saving us time on setting up and training from scratch. 
+We used the T5Tokenizer from Transformers to preprocess the dataset, ensuring that our input data was correctly formatted for the T5 model. We applied custom normalization for Danish-specific characters such as "å", "ø", and "æ" using the Sequence normalizer from the tokenizers package, which is part of the Transformers library.
+
+
 
 ## Coding environment
 
@@ -163,7 +166,14 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 4 fill here ---
+We used conda and pip for managing our dependencies. First you should clone the repository and cd into it. To initialize an environment based on our requirements files, on should run:
+```bash
+conda create -n ml_ops 'python==3.11'
+conda activate ml_ops
+pip install -e .
+```
+
+TO BE CONTINUED
 
 ### Question 5
 
@@ -179,7 +189,9 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 5 fill here ---
+We initialized our project using the given cookiecutter template. We use most folders...
+
+TO BE CONTINUED
 
 ### Question 6
 
