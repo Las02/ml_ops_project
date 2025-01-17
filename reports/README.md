@@ -228,7 +228,7 @@ These concepts are essential in larger projects as they ensure code consistency,
 >
 > Answer:
 
---- question 7 fill here ---
+We've implemented a total of 8 tests using pytest. The tests are focusing on ensuring that we are splitting and pre-processing (tokenizing) our data correctly. We've created a split function which allows us to control how much of the data we want to use for test/train respectively. Furthermore, we test our whether our model is initialized properly, that the configurations are loaded correctly and that the model.py can run without errors when executed. We consider this to be the most vital functionalities of our project.
 
 ### Question 8
 
