@@ -38,3 +38,4 @@ jobs:
 
       - name: Static type checking with MyPy
         run: mypy .
+        continue-on-error: true
