@@ -173,7 +173,7 @@ conda activate ml_ops
 pip install -e .
 ```
 
-TO BE CONTINUED
+Todo: TO BE CONTINUED
 
 ### Question 5
 
@@ -261,7 +261,8 @@ Even with a near 100% code coverage it is not certain that the code would be err
 >
 > Answer:
 
---- question 9 fill here ---
+During our project work, we used branches in order to minimize merge conflicts. Instead of each member having their own branch to do their work in, a new branch was created whenever a new feature was needed (an example of a "feature" being creating the train.py file/creating a test/making a function etc.). Furthermore, we used kanban boards (trello.com) to organize and divide our workload, and thereby ensure we weren't working on the same tasks or in the same files at the same time. Inevitably, the resulting merge conflicts were resolved collaboratively between group members on deciding what version to keep.
+In general, using branches allow developers to work on seperate features without affecting the main code base. In line with this, pull requests allow for code review and discussion before merging these changes.
 
 ### Question 10
 
@@ -276,7 +277,8 @@ Even with a near 100% code coverage it is not certain that the code would be err
 >
 > Answer:
 
---- question 10 fill here ---
+We decided not to use DVC for data version control. In general, it is beneficial to include version control of the data used when training a model in order to ensure reproducibility. In this project, we pre-process the data by splitting it into train/test set (at a given percent parameter), and tokenize it. DVC could help us track changes in the dataset or preprocessing steps over time. For example, if we decided to filter the dataset or modify the tokenization parameters, DVC would allow us to version these changes and link them to specific model training results.
+This versioning would enable us to rerun experiments with the correct dataset version, thus ensuring reproducibility.
 
 ### Question 11
 
