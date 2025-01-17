@@ -21,7 +21,6 @@ app = typer.Typer()
 def none():
     pass
 
-
 @app.command()
 def train():
     logger.info("Starting training")
