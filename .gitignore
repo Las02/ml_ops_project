@@ -13,6 +13,9 @@ manual_test/
 # Mac OS-specific storage files
 .DS_Store
 
+# env
+.env
+
 # vim
 *.swp
 *.swo
@@ -188,3 +191,5 @@ uv.lock
 ./data/raw/
 data/processed
 data/processed
+wandb
+data/cache

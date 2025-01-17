@@ -1,10 +1,13 @@
+import torch
 import torch.nn.functional as F
 import typer
 import yaml
 from loguru import logger
+from torch.optim import AdamW
 
 # %%
 from torch.utils.data import DataLoader
+from tqdm.auto import tqdm
 from transformers import (
     AutoModelForSeq2SeqLM,
     Seq2SeqTrainer,
@@ -13,15 +16,12 @@ from transformers import (
     T5Tokenizer,
 )
 
+import wandb
 from ml_ops_project.data import OpusDataset, Tokenize_data
 from ml_ops_project.model import *
 from ml_ops_project.model import initialize_model, load_model_config
 
-# Load Model
-model = initialize_model(load_model_config())
-
 # Load Data
-
 app = typer.Typer()
 
 
@@ -32,44 +32,60 @@ def none():
 
 @app.command()
 def train():
+    logger.info("Starting training")
+
     config = load_model_config()
     model = initialize_model(config)
 
+    # Set Device
+    device = torch.device(
+        "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
+    )
+
+    # Set optimizer
+    optimizer = AdamW(model.parameters(), lr=5e-5)
+
+    # dataset = OpusDataset("data/processed/train.txt")
     dataset = OpusDataset("data/test_data/test_data.txt")
     train_dataloader = DataLoader(dataset, batch_size=2, shuffle=False)
 
-    for truth, input in train_dataloader:
-        out = model(input_ids=input, labels=truth)
-        preds = F.softmax(out.logits, dim=-1).argmax(dim=-1)
+    with wandb.init(
+        # set the wandb project where this run will be logged
+        project="my-awesome-project",
+        # track hyperparameters and run metadata
+        config={
+            "learning_rate": 0.02,
+            "epochs": 10,
+        },
+    ):
+        config = wandb.config
+        for epoch in tqdm(range(config.epochs)):
+            wandb.log(
+                {
+                    "epoch": epoch,
+                }
+            )
+            logger.info(f"starting: epoch: {epoch}")
+            train_epoch(model, optimizer, dataset, train_dataloader)
 
-        # To translate back
-        print(dataset.decode(preds))
-        logger.info("TRAIN SUCCESS")
-        break
 
+def train_epoch(model, optimizer, dataset, dataloader):
+    for truth, input in dataloader:
+        outputs = model(input_ids=input, labels=truth)
+        preds = F.softmax(outputs.logits, dim=-1).argmax(dim=-1)
 
-# %%
+        loss = outputs.loss
+        loss.backward()
 
+        optimizer.step()
+        optimizer.zero_grad()
 
-#
-# # Import Configuration
-# def load_training_config(config_path="/Users/frederikreimert/Library/CloudStorage/OneDrive-DanmarksTekniskeUniversitet/Kandidat_DTU/2024E/MLops/project_folder/ml_ops_project/configs/train/train_config.yaml"):
-#     with open(config_path, "r") as file:
-#         config_dict = yaml.safe_load(file)
-#     return Seq2SeqTrainingArguments(**config_dict)
-#
-# training_args = load_training_config()
-#
-# # Load Trainer
-# trainer = Seq2SeqTrainer(
-#     model=model,
-#     args=training_args,
-#     train_dataset=tokenized_books["train"],
-#     eval_dataset=tokenized_books["test"],
-#     processing_class=tokenizer,
-#     data_collator=data_collator,
-#     compute_metrics=compute_metrics,
-# )
+        # Remove "<pad>" from preds
+        preds_decoded = dataset.decode(preds)
+        preds_decoded = [pred.replace("<pad>", "") for pred in preds_decoded]
+
+        logger.info(f"loss {loss}")
+        wandb.log({"loss": loss})
 
 
 if __name__ == "__main__":

@@ -1,10 +1,10 @@
 import subprocess
 
 import pytest
+from loguru import logger
 from transformers import T5Config, T5ForConditionalGeneration, T5Tokenizer
 
 from ml_ops_project.model import initialize_model, load_model_config
-
 
 
 def test_config_loads():

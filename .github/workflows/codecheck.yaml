@@ -38,4 +38,6 @@ jobs:
 
       - name: Static type checking with MyPy
         run: mypy .
-        continue-on-error: true
+
+      - name: Login to WandB
+        run: wandb login ${{ secrets.WANDB_SECRET }}
