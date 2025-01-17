@@ -8,10 +8,6 @@ from tokenizers.normalizers import Lowercase, Replace, Sequence
 from torch.utils.data import Dataset
 from transformers import T5Tokenizer
 
-# from transformers import AutoTokenizer
-
-# tokenizer = AutoTokenizer.from_pretrained("t5-small")
-
 app = typer.Typer()
 
 
@@ -26,8 +22,8 @@ class Tokenize_data:
         self.danish, self.english = self.read_in_file(preprocess_data_path)
 
         stripped_path = self.data_path.strip("/")[-1]
-        self.danish_cache_path = f"data/cache/{stripped_path}_danish_data.pck"
-        self.english_cache_path = f"data/cache/{stripped_path}_english_data.pck"
+        self.danish_cache_path = Path(f"data/cache/{stripped_path}_danish_data.pck")
+        self.english_cache_path = Path(f"data/cache/{stripped_path}_english_data.pck")
 
         # Set up tokenizer
         self.tokenizer = T5Tokenizer.from_pretrained("google-t5/t5-small")
@@ -56,6 +52,8 @@ class Tokenize_data:
             logger.info(
                 f"Cache found at {self.english_cache_path} and {self.danish_cache_path}: loading tokens from these"
             )
+            self.english_cache_path.parent.mkdir(exist_ok=True)
+            self.danish_cache_path.parent.mkdir(exist_ok=True)
             with open(self.english_cache_path, "rb") as f:
                 self.english_tokenized = pickle.load(f)
             with open(self.danish_cache_path, "rb") as f:
