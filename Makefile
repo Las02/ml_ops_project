@@ -7,6 +7,6 @@ setup_data:
 help:
 	python src/ml_ops_project/data.py --help
 test: 
-	pytest --capture=no -vv
+	python -m pytest
 train:
 	python src/ml_ops_project/train.py train
