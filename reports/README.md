@@ -173,7 +173,7 @@ conda activate ml_ops
 pip install -e .
 ```
 
-TO BE CONTINUED
+Todo: TO BE CONTINUED
 
 ### Question 5
 
@@ -258,7 +258,8 @@ We've implemented a total of 8 tests using pytest. The tests are focusing on ens
 >
 > Answer:
 
---- question 9 fill here ---
+During our project work, we used branches in order to minimize merge conflicts. Instead of each member having their own branch to do their work in, a new branch was created whenever a new feature was needed (an example of a "feature" being creating the train.py file/creating a test/making a function etc.). Furthermore, we used kanban boards (trello.com) to organize and divide our workload, and thereby ensure we weren't working on the same tasks or in the same files at the same time. Inevitably, the resulting merge conflicts were resolved collaboratively between group members on deciding what version to keep.
+In general, using branches allow developers to work on seperate features without affecting the main code base. In line with this, pull requests allow for code review and discussion before merging these changes.
 
 ### Question 10
 
