@@ -228,7 +228,7 @@ These concepts are essential in larger projects as they ensure code consistency,
 >
 > Answer:
 
-We've implemented a total of 8 tests using pytest. The tests are focusing on ensuring that we are splitting and pre-processing (tokenizing) our data correctly. We've created a split function which allows us to control how much of the data we want to use for test/train respectively. Furthermore, we test our whether our model is initialized properly, that the configurations are loaded correctly and that the model.py can run without errors when executed. We consider this to be the most vital functionalities of our project.
+We've implemented a total of 8 tests using pytest. The tests focus on ensuring that we are splitting and pre-processing (tokenizing) our data correctly. We've created a split function which allows us to control how much of the data we want to use for test/train respectively, and it is crucial that this function works as expected. Furthermore, we test our whether our model is initialized properly, that the configurations are loaded correctly and that the model.py can run without errors when executed. We consider this to be the most vital functionalities of our project.
 
 ### Question 8
 
@@ -261,7 +261,10 @@ Even with a near 100% code coverage it is not certain that the code would be err
 >
 > Answer:
 
-During our project work, we used branches in order to minimize merge conflicts. Instead of each member having their own branch to do their work in, a new branch was created whenever a new feature was needed (an example of a "feature" being creating the train.py file/creating a test/making a function etc.). Furthermore, we used kanban boards (trello.com) to organize and divide our workload, and thereby ensure we weren't working on the same tasks or in the same files at the same time. Inevitably, the resulting merge conflicts were resolved collaboratively between group members on deciding what version to keep.
+During our project work, we used branches in order to minimize merge conflicts. Instead of each member having their own branch to do their work in, a new branch was created whenever a new feature was needed (an example of a "feature" being creating the train.py file/creating a test/making a function etc.). Furthermore, we used kanban boards (trello.com) to organize and divide our workload, and thereby ensure we weren't working on the same tasks or in the same files at the same time.
+Smaller changes (such as filling out our answers to the reports/README.md) were allowed directly on the master branch. 
+Inevitably, the resulting merge conflicts were resolved collaboratively between group members on deciding what version to keep.
+
 In general, using branches allow developers to work on seperate features without affecting the main code base. In line with this, pull requests allow for code review and discussion before merging these changes.
 
 ### Question 10
@@ -314,7 +317,23 @@ This versioning would enable us to rerun experiments with the correct dataset ve
 >
 > Answer:
 
---- question 12 fill here ---
+We used a Makefile to structure our workflow, simplifying the cexecution of various tasks like data preparation, testing, and training. Each Makefile target represents a specific step in the workflow. For example, the setup_data target downloads the dataset, splits it into training and test subsets, and tokenizes it for use with our T5 model:
+
+
+```make
+setup_data:
+	# download data and split it
+	python src/ml_ops_project/data.py download-data
+	python src/ml_ops_project/data.py split-data
+	python src/ml_ops_project/data.py tokenize-data
+```
+
+For configuration of our model parameters and training parameters, we created model_config.yaml and train_config.yaml files, which contains the specified parameters. The model_config.yaml is used to initialize a T5Config object, and then passed to the T5ForConditionalGeneration model to configure it.
+Regarding the training parameters, 
+
+todo: aendre til at den bruger train_config.yaml fil i stedet for hardcoded.
+
+
 
 ### Question 13
 
@@ -329,7 +348,10 @@ This versioning would enable us to rerun experiments with the correct dataset ve
 >
 > Answer:
 
---- question 13 fill here ---
+As described above, we made use of config files to specify what parameters were used to initialize and train the model. 
+Following is an overview of the steps needed in order to reproduce an experiment:
+
+todo: include steps to reproduce experiment 
 
 ### Question 14
 
