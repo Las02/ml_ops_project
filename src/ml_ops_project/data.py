@@ -25,8 +25,9 @@ class Tokenize_data:
         self.data_path = preprocess_data_path
         self.danish, self.english = self.read_in_file(preprocess_data_path)
 
-        self.danish_cache_path = f"data/cache/{self.data_path.strip("/")[-1]}_danish_data.pck"
-        self.english_cache_path = f"data/cache/{self.data_path.strip("/")[-1]}_english_data.pck"
+        stripped_path = self.data_path.strip("/")[-1]
+        self.danish_cache_path = f"data/cache/{stripped_path}_danish_data.pck"
+        self.english_cache_path = f"data/cache/{stripped_path}_english_data.pck"
 
         # Set up tokenizer
         self.tokenizer = T5Tokenizer.from_pretrained("google-t5/t5-small")
