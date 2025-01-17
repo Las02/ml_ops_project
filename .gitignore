@@ -16,6 +16,9 @@ manual_test/
 # env
 .env
 
+#
+models/
+
 # vim
 *.swp
 *.swo
