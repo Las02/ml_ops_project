@@ -1,6 +1,7 @@
 import torch
 import torch.nn.functional as F
 import typer
+import wandb
 from loguru import logger
 from torch.optim import AdamW
 
@@ -8,7 +9,6 @@ from torch.optim import AdamW
 from torch.utils.data import DataLoader
 from tqdm.auto import tqdm
 
-import wandb
 from ml_ops_project.data import OpusDataset
 from ml_ops_project.model import *
 from ml_ops_project.model import initialize_model, load_model_config
@@ -37,6 +37,9 @@ def train():
         if torch.backends.mps.is_available()
         else "cpu"
     )
+
+    # Make dir for saving models if not exists
+    Path("models/").mkdir(exist_ok=True)
 
     # Set optimizer
     optimizer = AdamW(model.parameters(), lr=5e-5)
