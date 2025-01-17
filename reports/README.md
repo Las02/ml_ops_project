@@ -207,7 +207,9 @@ todo: delete unused folders and update this (103 words)
 >
 > Answer:
 
---- question 6 fill here ---
+We implemented several rules for code quality and formatting using tools like Black for consistent formatting, Ruff for linting, and Mypy for static type checking. Pre-commit hooks were used to enforce rules like removing trailing whitespace, ensuring end-of-file newlines, checking YAML syntax, and preventing large file commits. We also made sure to add docstrings and typing to important python functions for documentation.
+
+These concepts are essential in larger projects as they ensure code consistency, prevent errors, and improve maintainability. Automated checks save time, reduce technical debt, and support collaboration by making the codebase easier to understand and scale as the team grows.
 
 ## Version control
 
