@@ -72,11 +72,11 @@ def train():
         artifact = wandb.Artifact(
             name="ml_ops_project_model",
             type="model",
-            description="A transformer model trained to translate text (DK-EN)",
-            metadata={"accuracy": final_accuracy, "precision": final_precision, "recall": final_recall, "f1": final_f1},
+            description="A transformer model trained to translate text (DK-EN)"
+            #metadata={"accuracy": final_accuracy, "precision": final_precision, "recall": final_recall, "f1": final_f1},
         )
         
-        artifact.add_file("model.pt")
+        artifact.add_file("models/model.pt")
         run.log_artifact(artifact)
 
 
