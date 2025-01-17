@@ -4,6 +4,7 @@ setup_data:
 	# download data and split it
 	python src/ml_ops_project/data.py download-data
 	python src/ml_ops_project/data.py split-data
+	python src/ml_ops_project/data.py tokenize-data
 help:
 	python src/ml_ops_project/data.py --help
 test: 

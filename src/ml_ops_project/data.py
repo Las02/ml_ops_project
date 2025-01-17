@@ -28,26 +28,7 @@ class Tokenize_data:
         self.danish_cache_path = f"data/cache/{self.data_path.strip("/")[-1]}_danish_data.pck"
         self.english_cache_path = f"data/cache/{self.data_path.strip("/")[-1]}_english_data.pck"
 
-        # Redownload paths if not exsist
-        if (
-            not Path(self.danish_cache_path).exists()
-            or not Path(self.english_cache_path).exists()
-            or force_redownload
-        ):
-            logger.warning(
-                f"No cache containing tokenized data, begining tokenizing data: {preprocess_data_path}"
-            )
-            self.tokenize_data()
-        else:
-            logger.warning(
-                f"Cache found at {self.english_cache_path} and {self.danish_cache_path}: loading tokens from these"
-            )
-            with open(self.english_cache_path, "rb") as f:
-                self.english_tokenized = pickle.load(f)
-            with open(self.danish_cache_path, "rb") as f:
-                self.danish_tokenized = pickle.load(f)
-
-    def tokenize_data(self):
+        # Set up tokenizer
         self.tokenizer = T5Tokenizer.from_pretrained("google-t5/t5-small")
         # Normalize data
         normalizer = Sequence(
@@ -60,6 +41,26 @@ class Tokenize_data:
         )
         self.tokenizer.normalizer = normalizer
 
+        # Redownload paths if not exsist
+        if (
+            not Path(self.danish_cache_path).exists()
+            or not Path(self.english_cache_path).exists()
+            or force_redownload
+        ):
+            logger.warning(
+                f"No cache containing tokenized data or force_redownload argument provided, begining tokenizing data: {preprocess_data_path}"
+            )
+            self.tokenize_data()
+        else:
+            logger.info(
+                f"Cache found at {self.english_cache_path} and {self.danish_cache_path}: loading tokens from these"
+            )
+            with open(self.english_cache_path, "rb") as f:
+                self.english_tokenized = pickle.load(f)
+            with open(self.danish_cache_path, "rb") as f:
+                self.danish_tokenized = pickle.load(f)
+
+    def tokenize_data(self):
         logger.info("Starting tokenizing danish data")
         self.danish_tokenized = self.tokenizer(
             self.danish,
@@ -110,6 +111,7 @@ def split_data(
     with open(f"{raw_path}/train.txt", "r") as f:
         lines = f.readlines()
 
+    logger.info("Splitting downloaded dataset")
     n = len(lines)
     test_n = int(n * test_percent)
 
@@ -120,7 +122,16 @@ def split_data(
         f.writelines(lines[:test_n])
 
 
-from torch.utils.data import Dataset
+@app.command()
+def tokenize_data():
+    for path in [
+        "data/test_data/test_data.txt",
+        "data/processed/test.txt",
+        "data/processed/train.txt",
+        "data/raw/validation.txt",
+    ]:
+        logger.info(f"Begining data: {path}")
+        Tokenize_data(path, force_redownload=True)
 
 
 class OpusDataset(Dataset):
@@ -146,6 +157,7 @@ class OpusDataset(Dataset):
 
 @app.command()
 def download_data():
+    logger.info("Downloading dataset")
     ds = load_dataset("kaitchup/opus-Danish-to-English")
 
     with open("data/raw/train.txt", "w") as f:
