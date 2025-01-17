@@ -189,9 +189,10 @@ TO BE CONTINUED
 >
 > Answer:
 
-We initialized our project using the given cookiecutter template in this course (https://github.com/SkafteNicki/mlops_template). We've largely followed  this standard for organizing the code in our project. However, we have removed the notebooks folder as the project doesn't involve any. 
+We initialized our project using the given cookiecutter template in this course (https://github.com/SkafteNicki/mlops_template). We've largely followed  this standard for organizing the code in our project. 
+We've filled out the data (split into raw and processed), dockerfiles (containing the dockerfiles used in this project), models (for saving trained models for later use), reports (for the project), src (for relevant python scripts) and tests (for pytests) folders according to the standard. However, we have removed the notebooks folder as the project doesn't involve any. Furthermore, doing development of our framework we added a data/test_data folder for a subset of our dataset.
 
-todo: delete unused folders and update this
+todo: delete unused folders and update this (103 words)
 
 ### Question 6
 
