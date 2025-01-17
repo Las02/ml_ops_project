@@ -277,7 +277,8 @@ In general, using branches allow developers to work on seperate features without
 >
 > Answer:
 
---- question 10 fill here ---
+We decided not to use DVC for data version control. In general, it is beneficial to include version control of the data used when training a model in order to ensure reproducibility. In this project, we pre-process the data by splitting it into train/test set (at a given percent parameter), and tokenize it. DVC could help us track changes in the dataset or preprocessing steps over time. For example, if we decided to filter the dataset or modify the tokenization parameters, DVC would allow us to version these changes and link them to specific model training results.
+This versioning would enable us to rerun experiments with the correct dataset version, thus ensuring reproducibility.
 
 ### Question 11
 
