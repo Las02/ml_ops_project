@@ -13,6 +13,9 @@ manual_test/
 # Mac OS-specific storage files
 .DS_Store
 
+# env
+.env
+
 # vim
 *.swp
 *.swo
