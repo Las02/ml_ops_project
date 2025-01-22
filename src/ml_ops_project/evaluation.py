@@ -9,16 +9,15 @@ app = typer.Typer()
 logger.info("Loading evaluation method")
 bleu_metric = evaluate.load("sacrebleu")
 
+
 def postprocess_text(preds, labels):
     preds = [pred.strip() for pred in preds]
     labels = [[label.strip()] for label in labels]
     return preds, labels
 
-@app.command()
-def evaluate_model(model,
-                   test_dataloader,
-    batch_size: int = 2): 
 
+@app.command()
+def evaluate_model(model, test_dataloader, batch_size: int = 2):
     logger.info("Evaluating model")
     model.eval()
 
@@ -27,12 +26,8 @@ def evaluate_model(model,
 
     with torch.no_grad():
         for batch_idx, (truth_ids, input_ids) in enumerate(test_dataloader):
-
             generated_tokens = model.generate(
-                input_ids=input_ids,
-                max_length=64,
-                num_beams=4,
-                early_stopping=True
+                input_ids=input_ids, max_length=64, num_beams=4, early_stopping=True
             )
 
             batch_preds = dataset.decode(generated_tokens)
