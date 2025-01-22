@@ -9,9 +9,9 @@ from tqdm.auto import tqdm
 
 import wandb
 from ml_ops_project.data import OpusDataset
+from ml_ops_project.evaluation import sacrebleu
 from ml_ops_project.model import *
 from ml_ops_project.model import initialize_model, load_model_config
-from ml_ops_project.evaluation import sacrebleu
 
 # Load Data
 app = typer.Typer()
@@ -63,6 +63,8 @@ def train():
     test_dataloader = DataLoader(test_dataset, batch_size=len(test_dataset), shuffle=shuffle)
     val_dataloader = DataLoader(val_dataset, batch_size=len(val_dataset), shuffle=shuffle)
 
+    model.to_device(device)
+
     with wandb.init(
         # set the wandb project where this run will be logged
         project="my-awesome-project",
@@ -77,15 +79,15 @@ def train():
                 }
             )
             logger.info(f"starting: epoch: {epoch}")
-            train_epoch(model, optimizer, train_dataset, train_dataloader)
+            train_epoch(model, optimizer, train_dataset, train_dataloader, device)
             # Apply model to test data
             test_val_epoch(
-                model, optimizer, test_dataloader, loss_name="test_loss", test_dataset=test_dataset
+                model, optimizer, test_dataloader, loss_name="test_loss", test_dataset=test_dataset, device
             )
 
         # Apply model to val data
         test_val_epoch(
-            model, optimizer, val_dataloader, loss_name="val_loss", test_dataset=val_dataset
+            model, optimizer, val_dataloader, loss_name="val_loss", test_dataset=val_dataset, device
         )
 
         torch.save(model.state_dict(), "models/model.pt")
@@ -100,8 +102,11 @@ def train():
         run.log_artifact(artifact)
 
 
-def train_epoch(model, optimizer, dataset, dataloader):
+def train_epoch(model, optimizer, dataset, dataloader, device):
     for truth, input in dataloader:
+        truth = truth.to_device(device)
+        input = input.to_device(device)
+
         outputs = model(input_ids=input, labels=truth)
         preds = F.softmax(outputs.logits, dim=-1).argmax(dim=-1)
 
@@ -119,11 +124,14 @@ def train_epoch(model, optimizer, dataset, dataloader):
         wandb.log({"loss": loss})
 
 
-def test_val_epoch(model, optimizer, dataloader, loss_name, test_dataset):
+def test_val_epoch(model, optimizer, dataloader, loss_name, test_dataset, device):
     logger.info(f"Starting for {loss_name}")
     model.eval()
     total_loss = 0
     for truth, input in dataloader:
+        truth = truth.to_device(device)
+        input = input.to_device(device)
+
         outputs = model(input_ids=input, labels=truth)
         preds = F.softmax(outputs.logits, dim=-1).argmax(dim=-1)
 
