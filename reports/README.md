@@ -542,7 +542,9 @@ As mentioned earlier we managed to get everything set up to train our model in t
 >
 > Answer:
 
---- question 26 fill here ---
+We did not implement any monitoring for our deployed model. However, doing so would have been crucuial for ensuring longevity and reliability of our application. As our model is trained to translate from English to Danish, monitoring data drifting would have been ideal, as the input data (the language) will change over time, ultimatively degrading the translation quality of our model over time. 
+
+Furthermore, system monitoring would enable us to track different metrics, such as translation accuracy and number of requests. Furthermore, implementing system/error logs would help diagonose unforeseen issues. In general, monitoring would provide insights for future improvements of our application.
 
 ## Overall discussion of project
 
