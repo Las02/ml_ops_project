@@ -114,7 +114,7 @@ def train():
 
 def train_epoch(model, optimizer, dataset, dataloader, device):
     for truth, input in dataloader:
-        truth = truth.toe(device)
+        truth = truth.to(device)
         input = input.to(device)
 
         outputs = model(input_ids=input, labels=truth)
