@@ -7,7 +7,6 @@ from torch.optim import AdamW
 import yaml
 from torch.utils.data import DataLoader
 from tqdm.auto import tqdm
-
 from ml_ops_project.data import OpusDataset
 from ml_ops_project.model import *
 from ml_ops_project.model import initialize_model, load_model_config
@@ -15,11 +14,9 @@ from ml_ops_project.model import initialize_model, load_model_config
 # Load Data
 app = typer.Typer()
 
-
 @app.command()
 def none():
     pass
-
 
 @app.command()
 def train():
