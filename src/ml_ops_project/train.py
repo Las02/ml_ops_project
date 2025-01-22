@@ -59,7 +59,7 @@ def train():
     val_dataset = OpusDataset("data/raw/validation.txt")
 
     shuffle = True
-    train_dataloader = DataLoader(train_dataset, batch_size=24, shuffle=shuffle)
+    train_dataloader = DataLoader(train_dataset, batch_size=16, shuffle=shuffle)
     test_dataloader = DataLoader(test_dataset, batch_size=len(test_dataset), shuffle=shuffle)
     val_dataloader = DataLoader(val_dataset, batch_size=len(val_dataset), shuffle=shuffle)
 
