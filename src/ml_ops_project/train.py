@@ -56,8 +56,8 @@ def train():
 
     shuffle = True
     train_dataloader = DataLoader(train_dataset, batch_size=2, shuffle=shuffle)
-    test_dataloader = DataLoader(test_dataset, batch_size=2, shuffle=shuffle)
-    val_dataloader = DataLoader(val_dataset, batch_size=2, shuffle=shuffle)
+    test_dataloader = DataLoader(test_dataset, batch_size=len(test_dataset), shuffle=shuffle)
+    val_dataloader = DataLoader(val_dataset, batch_size=len(val_dataset), shuffle=shuffle)
 
     with wandb.init(
         # set the wandb project where this run will be logged
@@ -123,7 +123,6 @@ def test_val_epoch(model, optimizer, dataloader, loss_name, test_dataset):
         preds = F.softmax(outputs.logits, dim=-1).argmax(dim=-1)
 
         loss = outputs.loss
-        # total_loss += loss
 
     logger.info(f"{loss_name} {loss}")
     wandb.log({f"{loss_name}": loss})
