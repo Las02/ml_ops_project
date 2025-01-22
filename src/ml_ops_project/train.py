@@ -16,11 +16,9 @@ from ml_ops_project.evaluation import sacrebleu
 # Load Data
 app = typer.Typer()
 
-
 @app.command()
 def none():
     pass
-
 
 @app.command()
 def train():
@@ -129,7 +127,10 @@ def test_val_epoch(model, optimizer, dataloader, loss_name, test_dataset):
 
     logger.info(f"{loss_name} {loss}")
     wandb.log({f"{loss_name}": loss})
-    sacrebleu(model, dataloader, test_dataset=test_dataset, batch_size=2)
+    bleu_score = sacrebleu(model, dataloader, test_dataset=test_dataset, batch_size=32)
+    logger.info(f"bleu_score {bleu_score}")
+    wandb.log({"bleu_score": bleu_score})
+
     model.train()
 
 

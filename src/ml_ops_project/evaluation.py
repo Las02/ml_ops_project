@@ -44,6 +44,6 @@ def sacrebleu(model, test_dataloader, test_dataset, batch_size: int = 2):
     final_preds, final_refs = postprocess_text(all_predictions, all_targets)
 
     bleu_score = bleu_metric.compute(predictions=final_preds, references=final_refs)
-    logger.info(f"BLEU: {bleu_score['score']:.4f}")
+    
+    return (bleu_score['score'])
 
-    logger.info("Evaluation complete!")
