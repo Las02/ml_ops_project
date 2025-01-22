@@ -11,7 +11,7 @@ import wandb
 from ml_ops_project.data import OpusDataset
 from ml_ops_project.model import *
 from ml_ops_project.model import initialize_model, load_model_config
-from ml_ops_project.evaluation import sacrebleu, postprocess_text
+from ml_ops_project.evaluation import sacrebleu
 
 # Load Data
 app = typer.Typer()
@@ -50,9 +50,12 @@ def train():
     # Set optimizer
     optimizer = AdamW(model.parameters(), lr=learning_rate)
 
-    train_dataset = OpusDataset("data/test_data/test_data.txt")
-    test_dataset = OpusDataset("data/test_data/test_data.txt")
-    val_dataset = OpusDataset("data/test_data/test_data.txt")
+    # train_dataset = OpusDataset("data/test_data/test_data.txt")
+    # test_dataset = OpusDataset("data/test_data/test_data.txt")
+    # val_dataset = OpusDataset("data/test_data/test_data.txt")
+    train_dataset = OpusDataset("data/processed/train.txt")
+    test_dataset = OpusDataset("data/processed/test.txt")
+    val_dataset = OpusDataset("data/raw/validation.txt")
 
     shuffle = True
     train_dataloader = DataLoader(train_dataset, batch_size=2, shuffle=shuffle)
@@ -75,10 +78,14 @@ def train():
             logger.info(f"starting: epoch: {epoch}")
             train_epoch(model, optimizer, train_dataset, train_dataloader)
             # Apply model to test data
-            test_val_epoch(model, optimizer, test_dataloader, loss_name="test_loss", test_dataset=test_dataset)
+            test_val_epoch(
+                model, optimizer, test_dataloader, loss_name="test_loss", test_dataset=test_dataset
+            )
 
         # Apply model to val data
-        test_val_epoch(model, optimizer, val_dataloader, loss_name="val_loss", test_dataset=val_dataset)
+        test_val_epoch(
+            model, optimizer, val_dataloader, loss_name="val_loss", test_dataset=val_dataset
+        )
 
         torch.save(model.state_dict(), "models/model.pt")
         artifact = wandb.Artifact(
@@ -122,7 +129,7 @@ def test_val_epoch(model, optimizer, dataloader, loss_name, test_dataset):
 
     logger.info(f"{loss_name} {loss}")
     wandb.log({f"{loss_name}": loss})
-    sacrebleu(model, dataloader, test_dataset = test_dataset, batch_size=2)
+    sacrebleu(model, dataloader, test_dataset=test_dataset, batch_size=2)
     model.train()
 
 

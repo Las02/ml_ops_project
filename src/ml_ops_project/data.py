@@ -140,13 +140,15 @@ class OpusDataset(Dataset):
     def __init__(self, data_path: Path) -> None:
         self.data_path = data_path
         self.tokenize_data = Tokenize_data(self.data_path)
+        self.len = len(self.tokenize_data.danish_tokenized["input_ids"])
 
     def decode(self, tokens: list[list]):
         return [self.tokenize_data.tokenizer.decode(x) for x in tokens]
 
     def __len__(self) -> int:
         """Return the length of the dataset."""
-        return len(self.tokenize_data.danish)
+        # return len(self.tokenize_data.danish)
+        return self.len
 
     def __getitem__(self, index: int):
         """Return a given sample from the dataset."""

@@ -23,17 +23,25 @@ class TestTokenizer:
         assert len(tokenized_data) > 0
         assert all(isinstance(x, int) for x in tokenized_data)
 
-        def test_dataloader():
-            dataset = OpusDataset("data/test_data/test_data.txt")
-            train_dataloader = DataLoader(dataset, batch_size=1, shuffle=False)
-            # Get the first batch of data
-            batch = next(iter(train_dataloader))
-            input_ids = batch[1][0].tolist()
-            # Remove zero padding
-            input_ids = [x for x in input_ids if x != 0]
-            # Assert input is correct by checking if the tokenized data is not empty and contains integers
-            assert len(input_ids) > 0
-            assert all(isinstance(x, int) for x in input_ids)
+    def test_dataloader(self):
+        dataset = OpusDataset("data/test_data/test_data.txt")
+        train_dataloader = DataLoader(dataset, batch_size=1, shuffle=False)
+        # Get the first batch of data
+        batch = next(iter(train_dataloader))
+        input_ids = batch[1][0].tolist()
+        # Remove zero padding
+        input_ids = [x for x in input_ids if x != 0]
+        # Assert input is correct by checking if the tokenized data is not empty and contains integers
+        assert len(input_ids) > 0
+        assert all(isinstance(x, int) for x in input_ids)
+
+    def test_dataloader_full(self):
+        dataset = OpusDataset("data/processed/train.txt")
+        dataloader = DataLoader(dataset, batch_size=2, shuffle=False)
+        # Get the first batch of data
+
+        for truth, input in dataloader:
+            pass
 
 
 # def test_dataloader_detokenize():
