@@ -479,7 +479,6 @@ We started off using the compute engine to train our models. Here we started off
 >
 > Answer:
 
---- question 22 fill here ---
 As mentioned earlier we managed to get everything set up to train our model in the cloud using the Google Compute Engine application - although we did not manage to get GPU support working as we did not have time to get propper permissions from Google to use the GPU ressources. To get our model set up using the Google Compute engine, we started off by by first dockerizing our application. Here we included steps to download and tokenize our data. As our data could be downloaded in the cloud we did not keep it in a cloud. To dockerize our data we used the Google Cloud build application, by preparing the cloudbuild.yaml found in our repository. We then open up a VM on the Google Compute Engine and ssh'ed into the VM. Here we set up docker and pulled the dockerized application from the google artifacts registry - and trained the model. But due to the lack of GPU support we did give the model time enough to finish training and instead used theHPC system at dtu for training the model.
 
 ## Deployment
