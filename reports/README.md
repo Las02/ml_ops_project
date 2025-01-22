@@ -368,7 +368,13 @@ Regarding the training parameters, the parameters are loaded from the train_conf
 >
 > Answer:
 
---- question 14 fill here ---
+As seen in the attached screenshot, we have tracked several metrics for our experiments to evaluate and compare model performance effectively.
+Loss: The loss curves for all models are tracked during training. Loss is a crucial metric as it directly reflects how well the model predictions align with the ground truth.
+BLEU Score: This metric is logged to evaluate the performance of our models on a natural language processing task. BLEU score provides insights into how well the model-generated text aligns with the reference text, which is important for machine translation  applications.
+<!-- Test Loss: By monitoring test loss, we ensure that the models generalize well to unseen data and check for any signs of overfitting. A consistent reduction in test loss validates that the model is robust.
+Validation Loss: Validation loss helps in hyperparameter tuning and serves as an indicator for early stopping during training to prevent overfitting. -->
+
+todo: insert screenshot(s)
 
 ### Question 15
 
@@ -433,6 +439,7 @@ We used Compute Engine, Artifact Registry, and Cloud Build in our project. Compu
 > Answer:
 
 --- question 18 fill here ---
+We started off using the compute engine to train our models. Here we started off testing whether our dockerized application (build using cloud build and stored on artifact registry) worked using an E2 instance with the minimum compute specs - but with additional disk storage to make room for the dataset and the large pytorch dependencies. Later when we had figured out how to get our dockerized application to run correctly, we change to a larger VM. Here we swapped to an E2 instance with the "e2-highcpu-16" but we still had pretty slow performance - and our plan was therefore to swap to a VM with GPU support. Unfortunatly, since we did not request GPU access in time we did not were not able to use the VM with GPU support. We therefore choose to train our model on the DTU HPC. Here the model was trained on a Tesla V100-SXM2.
 
 ### Question 19
 
