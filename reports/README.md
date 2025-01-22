@@ -368,7 +368,13 @@ Regarding the training parameters, the parameters are loaded from the train_conf
 >
 > Answer:
 
---- question 14 fill here ---
+As seen in the attached screenshot, we have tracked several metrics for our experiments to evaluate and compare model performance effectively.
+Loss: The loss curves for all models are tracked during training. Loss is a crucial metric as it directly reflects how well the model predictions align with the ground truth.
+BLEU Score: This metric is logged to evaluate the performance of our models on a natural language processing task. BLEU score provides insights into how well the model-generated text aligns with the reference text, which is important for machine translation  applications.
+<!-- Test Loss: By monitoring test loss, we ensure that the models generalize well to unseen data and check for any signs of overfitting. A consistent reduction in test loss validates that the model is robust.
+Validation Loss: Validation loss helps in hyperparameter tuning and serves as an indicator for early stopping during training to prevent overfitting. -->
+
+todo: insert screenshot(s)
 
 ### Question 15
 
