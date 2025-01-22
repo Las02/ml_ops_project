@@ -14,9 +14,11 @@ from ml_ops_project.model import initialize_model, load_model_config
 # Load Data
 app = typer.Typer()
 
+
 @app.command()
 def none():
     pass
+
 
 @app.command()
 def train():
