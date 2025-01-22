@@ -447,7 +447,7 @@ We started off using the compute engine to train our models. Here we started off
 >
 > Answer:
 
-[Bucket](figures/bucket.png)
+![Bucket](figures/bucket.png)
 
 ### Question 20
 
@@ -456,7 +456,7 @@ We started off using the compute engine to train our models. Here we started off
 >
 > Answer:
 
-[Artifacts](figures/artifacts.png)
+![Artifacts](figures/artifacts.png)
 
 ### Question 21
 
@@ -464,7 +464,7 @@ We started off using the compute engine to train our models. Here we started off
 > **your project. You can take inspiration from [this figure](figures/build.png).**
 >
 > Answer:
-[Cloud_build](figures/build.png)
+![Cloud_build](figures/build.png)
 
 ### Question 22
 
