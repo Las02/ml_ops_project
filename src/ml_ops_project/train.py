@@ -81,10 +81,24 @@ def train():
             logger.info(f"starting: epoch: {epoch}")
             train_epoch(model, optimizer, train_dataset, train_dataloader, device)
             # Apply model to test data
-            test_val_epoch( model, optimizer, test_dataloader, loss_name="test_loss", test_dataset=test_dataset, device)
+            test_val_epoch(
+                model,
+                optimizer,
+                test_dataloader,
+                loss_name="test_loss",
+                test_dataset=test_dataset,
+                device=device,
+            )
 
         # Apply model to val data
-        test_val_epoch( model, optimizer, val_dataloader, loss_name="val_loss", test_dataset=val_dataset, device)
+        test_val_epoch(
+            model,
+            optimizer,
+            val_dataloader,
+            loss_name="val_loss",
+            test_dataset=val_dataset,
+            device=device,
+        )
 
         torch.save(model.state_dict(), "models/model.pt")
         artifact = wandb.Artifact(
