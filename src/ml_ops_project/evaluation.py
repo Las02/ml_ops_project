@@ -17,11 +17,7 @@ def postprocess_text(preds, labels):
 
 
 @app.command()
-def sacrebleu(model,
-                   test_dataloader, 
-                   test_dataset,
-    batch_size: int = 2): 
-
+def sacrebleu(model, test_dataloader, test_dataset, batch_size: int = 2):
     logger.info("Evaluating model")
     model.eval()
 
