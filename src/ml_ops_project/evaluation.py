@@ -17,7 +17,7 @@ def postprocess_text(preds, labels):
 
 
 @app.command()
-def evaluate_model(model, test_dataloader, batch_size: int = 2):
+def sacrebleu(model, test_dataloader, test_dataset, batch_size: int = 2):
     logger.info("Evaluating model")
     model.eval()
 
@@ -30,9 +30,9 @@ def evaluate_model(model, test_dataloader, batch_size: int = 2):
                 input_ids=input_ids, max_length=64, num_beams=4, early_stopping=True
             )
 
-            batch_preds = dataset.decode(generated_tokens)
+            batch_preds = test_dataset.decode(generated_tokens)
 
-            batch_truths = dataset.decode(truth_ids)
+            batch_truths = test_dataset.decode(truth_ids)
 
             # Clean up <pad> tokens
             batch_preds = [p.replace("<pad>", "").strip() for p in batch_preds]
@@ -45,12 +45,10 @@ def evaluate_model(model, test_dataloader, batch_size: int = 2):
             for p, r in zip(batch_preds, batch_truths):
                 logger.info(f"Predicted: {p} | Reference: {r}")
 
-    logger.info("Post-processing text for BLEU computation...")
     final_preds, final_refs = postprocess_text(all_predictions, all_targets)
 
     logger.info("Computing BLEU score with SacreBLEU...")
     bleu_score = bleu_metric.compute(predictions=final_preds, references=final_refs)
     logger.info(f"BLEU: {bleu_score['score']:.4f}")
-    print(f"\nFinal BLEU score: {bleu_score['score']:.4f}\n")
 
     logger.info("Evaluation complete!")
