@@ -404,9 +404,9 @@ todo: insert screenshot(s)
 >
 > Answer:
 
-Debugging methods varied among our group members. Some used breakpoints and the built-in debugger function in their IDE to step through the code and inspect variable values at different stages. Others preferred print statements to quickly track the flow of execution and identify where the issue might lie. Another group member utilized interactive debugging in Jupyter Notebooks, running code in smaller, isolated cells to more easily identify errors and experiment with potential fixes. 
+Debugging methods varied among our group members. Some used breakpoints and the built-in debugger function in their IDE (vscode) to step through the code and inspect variable values at different stages. Others preferred print statements to quickly track the flow of execution and identify where the issue might lie. Another group member utilized interactive debugging in Jupyter Notebooks, running code in smaller, isolated cells to more easily identify errors and experiment with potential fixes. 
+Although we didn't profile our code, doing so would have been beneficial to identify bottle necks and inefficient code, and thereby optimize runtime and code quality. 
 
-todo: write about profiling?
 
 ## Working in the cloud
 
@@ -438,7 +438,6 @@ We used Compute Engine, Artifact Registry, and Cloud Build in our project. Compu
 >
 > Answer:
 
---- question 18 fill here ---
 We started off using the compute engine to train our models. Here we started off testing whether our dockerized application (build using cloud build and stored on artifact registry) worked using an E2 instance with the minimum compute specs - but with additional disk storage to make room for the dataset and the large pytorch dependencies. Later when we had figured out how to get our dockerized application to run correctly, we change to a larger VM. Here we swapped to an E2 instance with the "e2-highcpu-16" but we still had pretty slow performance - and our plan was therefore to swap to a VM with GPU support. Unfortunatly, since we did not request GPU access in time we did not were not able to use the VM with GPU support. We therefore choose to train our model on the DTU HPC. Here the model was trained on a Tesla V100-SXM2.
 
 ### Question 19
@@ -448,7 +447,7 @@ We started off using the compute engine to train our models. Here we started off
 >
 > Answer:
 
---- question 19 fill here ---
+[Bucket](figures/bucket.png)
 
 ### Question 20
 
@@ -457,7 +456,7 @@ We started off using the compute engine to train our models. Here we started off
 >
 > Answer:
 
---- question 20 fill here ---
+[Artifacts](figures/artifacts.png)
 
 ### Question 21
 
@@ -465,8 +464,7 @@ We started off using the compute engine to train our models. Here we started off
 > **your project. You can take inspiration from [this figure](figures/build.png).**
 >
 > Answer:
-
---- question 21 fill here ---
+[Cloud_build](figures/build.png)
 
 ### Question 22
 
@@ -481,7 +479,7 @@ We started off using the compute engine to train our models. Here we started off
 >
 > Answer:
 
---- question 22 fill here ---
+As mentioned earlier we managed to get everything set up to train our model in the cloud using the Google Compute Engine application - although we did not manage to get GPU support working as we did not have time to get propper permissions from Google to use the GPU ressources. To get our model set up using the Google Compute engine, we started off by by first dockerizing our application. Here we included steps to download and tokenize our data. As our data could be downloaded in the cloud we did not keep it in a cloud. To dockerize our data we used the Google Cloud build application, by preparing the cloudbuild.yaml found in our repository. We then open up a VM on the Google Compute Engine and ssh'ed into the VM. Here we set up docker and pulled the dockerized application from the google artifacts registry - and trained the model. But due to the lack of GPU support we did give the model time enough to finish training and instead used theHPC system at dtu for training the model.
 
 ## Deployment
 
@@ -544,7 +542,9 @@ We started off using the compute engine to train our models. Here we started off
 >
 > Answer:
 
---- question 26 fill here ---
+We did not implement any monitoring for our deployed model. However, doing so would have been crucuial for ensuring longevity and reliability of our application. As our model is trained to translate from English to Danish, monitoring data drifting would have been ideal, as the input data (the language) will change over time, ultimatively degrading the translation quality of our model over time. 
+
+Furthermore, system monitoring would enable us to track different metrics, such as translation accuracy and number of requests. Furthermore, implementing system/error logs would help diagonose unforeseen issues. In general, monitoring would provide insights for future improvements of our application.
 
 ## Overall discussion of project
 
@@ -563,7 +563,8 @@ We started off using the compute engine to train our models. Here we started off
 >
 > Answer:
 
---- question 27 fill here ---
+We ended up all using the same project on the Google Cloud Platform - we just added everyone to a project and gave them the correct permission. We only ended up using $1.07 as we did not do the actual training on GCP and instead used the HPC for the training. Working on the cloud seemed much more complicated compared to just using an HPC. On the cloud there exists so many different applications with slightly different user cases - which makes it difficult to navigate them. Additionally the GUI interface becomes annoying after awhile, although we suppose this could be fixed by getting more fammiliar with the CLI interface. Notheless the value of using a GCP is clear as it makes it easier to scale applications and keep costs down - especially if you dont have access to a HPC system - or want to host an application which many businesses rely on. 
+
 
 ### Question 28
 
@@ -585,7 +586,7 @@ We started off using the compute engine to train our models. Here we started off
 
 > **Include a figure that describes the overall architecture of your system and what services that you make use of.**
 > **You can take inspiration from [this figure](figures/overview.png). Additionally, in your own words, explain the**
-> **overall steps in figure.**
+> **overall steps in figure.**Engine
 >
 > Recommended answer length: 200-400 words
 >
@@ -628,4 +629,4 @@ We started off using the compute engine to train our models. Here we started off
 > *We have used ChatGPT to help debug our code. Additionally, we used GitHub Copilot to help write some of our code.*
 > Answer:
 
---- question 31 fill here ---
+We all contributed equally to the project, using tools like ChatGPT, Deepseek, and GitHub Copilot to debug and write code more efficiently. While everyone pitched in, Benedicte took the lead in organizing tasks and keeping the team on track. It was a collaborative effort, and we balanced teamwork with a little help from AI to get things done.
