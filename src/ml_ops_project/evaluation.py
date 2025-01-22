@@ -45,13 +45,8 @@ def sacrebleu(model,
             all_predictions.extend(batch_preds)
             all_targets.extend(batch_truths)
 
-            logger.info(f"Batch {batch_idx}:")
-            for p, r in zip(batch_preds, batch_truths):
-                logger.info(f"Predicted: {p} | Reference: {r}")
-
     final_preds, final_refs = postprocess_text(all_predictions, all_targets)
 
-    logger.info("Computing BLEU score with SacreBLEU...")
     bleu_score = bleu_metric.compute(predictions=final_preds, references=final_refs)
     logger.info(f"BLEU: {bleu_score['score']:.4f}")
 

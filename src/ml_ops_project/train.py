@@ -63,10 +63,7 @@ def train():
         # set the wandb project where this run will be logged
         project="my-awesome-project",
         # track hyperparameters and run metadata
-        config={
-            "learning_rate": learning_rate,
-            "epochs": num_epochs,
-        },
+        config = train_config,
     ) as run:
         config = wandb.config
         for epoch in tqdm(range(config.epochs)):
@@ -93,7 +90,6 @@ def train():
 
         artifact.add_file("models/model.pt")
         run.log_artifact(artifact)
-
 
 def train_epoch(model, optimizer, dataset, dataloader):
     for truth, input in dataloader:
