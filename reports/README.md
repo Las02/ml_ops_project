@@ -389,7 +389,12 @@ todo: insert screenshot(s)
 >
 > Answer:
 
---- question 15 fill here ---
+For our project we mainly realied on a docker image describing how to create a docker container with the correct environment, data and scripts for training our models. This file could be run with: 
+`docker run -e  <wandb_api_key> <docker_container>` 
+Here we provide the script with the wandb_api_key such that it can connect to our wandb account for logging the various parameters and output of our training loop. A link to the dockerfile can be found at: 
+<https://github.com/Las02/ml_ops_project/blob/master/dockerfiles/train.dockerfile>*
+This dockerimage was the build using the Google Cloud Build application and stored on the Google Artifact repository. We could then pull the docker container down whenever we wanted to run it to train our model. 
+
 
 ### Question 16
 

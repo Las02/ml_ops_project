@@ -1,5 +1,4 @@
 import torch
-import torch.nn.functional as F
 import yaml
 from loguru import logger
 from torch.optim import AdamW
@@ -17,11 +16,7 @@ model = initialize_model(config)
 
 # Set the device
 device = torch.device(
-    "cuda"
-    if torch.cuda.is_available()
-    else "mps"
-    if torch.backends.mps.is_available()
-    else "cpu"
+    "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
 )
 
 device = torch.device("cpu")  # Use CPU for validation
@@ -45,6 +40,7 @@ test_dataloader = DataLoader(test_dataset, batch_size=32, shuffle=True)
 
 # Initialize optimizer (though it's not needed for evaluation)
 optimizer = AdamW(model.parameters(), lr=learning_rate)
+
 
 # Test and evaluate the model
 def test_val(model, dataloader, test_dataset, device):
@@ -78,6 +74,7 @@ def test_val(model, dataloader, test_dataset, device):
 
     # Return the metrics for further analysis or logging
     return average_loss, bleu_score
+
 
 if __name__ == "__main__":
     test_val(model, test_dataloader, test_dataset, device)
