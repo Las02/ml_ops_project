@@ -75,7 +75,7 @@ def train():
                 }
             )
             logger.info(f"starting: epoch: {epoch}")
-            # train_epoch(model, optimizer, train_dataset, train_dataloader)
+            train_epoch(model, optimizer, train_dataset, train_dataloader)
             # Apply model to test data
             test_val_epoch(model, optimizer, test_dataloader, loss_name="test_loss")
 
