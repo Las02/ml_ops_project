@@ -166,14 +166,15 @@ We used the T5Tokenizer from Transformers to preprocess the dataset, ensuring th
 >
 > Answer:
 
-We used conda and pip for managing our dependencies. First you should clone the repository and cd into it. To initialize an environment based on our requirements files, on should run:
+We used a combination of Conda and pip for managing our project dependencies. To set up an exact copy of our development environment, a new team member should clone the repository and cd into it. To initialize an environment based on our requirements, one should run the following:
+
 ```bash
 conda create -n ml_ops 'python==3.11'
 conda activate ml_ops
 pip install -e .
 ```
-
-Todo: TO BE CONTINUED
+This will create an environment for for the project, activate it, and install the requirements. 
+We log the needed packages to run our project in a requirements.txt file. Furthermore, in this file we state the version of each package in order to ensure reproducibility and robustness of our project. 
 
 ### Question 5
 
