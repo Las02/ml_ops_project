@@ -50,8 +50,8 @@ def train():
     optimizer = AdamW(model.parameters(), lr=learning_rate)
 
     train_dataset = OpusDataset("data/test_data/test_data.txt")
-    test_dataset = (OpusDataset("data/test_data/test_data.txt"),)
-    val_dataset = (OpusDataset("data/test_data/test_data.txt"),)
+    test_dataset = OpusDataset("data/test_data/test_data.txt")
+    val_dataset = OpusDataset("data/test_data/test_data.txt")
 
     shuffle = True
     train_dataloader = DataLoader(train_dataset, batch_size=2, shuffle=shuffle)
