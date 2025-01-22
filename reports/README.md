@@ -627,4 +627,4 @@ We ended up all using the same project on the Google Cloud Platform - we just ad
 > *We have used ChatGPT to help debug our code. Additionally, we used GitHub Copilot to help write some of our code.*
 > Answer:
 
---- question 31 fill here ---
+We all contributed equally to the project, using tools like ChatGPT, Deepseek, and GitHub Copilot to debug and write code more efficiently. While everyone pitched in, Benedicte took the lead in organizing tasks and keeping the team on track. It was a collaborative effort, and we balanced teamwork with a little help from AI to get things done.
