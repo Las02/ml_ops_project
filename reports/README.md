@@ -143,8 +143,8 @@ s203512, s203520, s203581, s204201
 >
 > Answer:
 
-We used the third-party framework Transformers from Hugggingface in our project. We finetuned the pretrained T5 model to translate from English to Danish. The framework made it easy to access and work with the T5 model, saving us time on setting up and training from scratch. 
-We used the T5Tokenizer from Transformers to preprocess the dataset, ensuring that our input data was correctly formatted for the T5 model. We applied custom normalization for Danish-specific characters such as "å", "ø", and "æ" using the Sequence normalizer from the tokenizers package, which is part of the Transformers library.
+We used the third-party framework Transformers from Huggingface to fine-tune the pretrained T5 model for translating from English to Danish. The framework made it easy to access and work with the T5 model, saving us time on setting up and training from scratch. 
+We used the T5Tokenizer from Transformers to preprocess the dataset, ensuring that our input data was correctly formatted for the T5 model. Furthermore, we had to address challenges related to token alignment for Danish-specific characters such as "å", "ø", and "æ" . Here we applied custom normalization for Danish-specific characters using the Sequence normalizer from the tokenizers package, which is part of the Transformers library. 
 
 
 
