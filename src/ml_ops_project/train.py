@@ -63,7 +63,7 @@ def train():
     test_dataloader = DataLoader(test_dataset, batch_size=len(test_dataset), shuffle=shuffle)
     val_dataloader = DataLoader(val_dataset, batch_size=len(val_dataset), shuffle=shuffle)
 
-    model.to_device(device)
+    model.to(device)
 
     with wandb.init(
         # set the wandb project where this run will be logged
@@ -114,8 +114,8 @@ def train():
 
 def train_epoch(model, optimizer, dataset, dataloader, device):
     for truth, input in dataloader:
-        truth = truth.to_device(device)
-        input = input.to_device(device)
+        truth = truth.toe(device)
+        input = input.to(device)
 
         outputs = model(input_ids=input, labels=truth)
         preds = F.softmax(outputs.logits, dim=-1).argmax(dim=-1)
