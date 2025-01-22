@@ -5,7 +5,7 @@ steps:
     'build',
     '.',
     '-t',
-    'europe-west9-docker.pkg.dev/$PROJECT_ID/ml-ops/ml_ops_train',
+    'europe-west9-docker.pkg.dev/$PROJECT_ID/mlopstrain20250122/docker_image_1
     '-f',
     './dockerfiles/train.dockerfile'
   ]
@@ -14,7 +14,7 @@ steps:
   id: 'Push container image'
   args: [
     'push',
-    'europe-west9-docker.pkg.dev/$PROJECT_ID/ml-ops/ml_ops_train'
+    'europe-west9-docker.pkg.dev/$PROJECT_ID/mlopstrain20250122/docker_image_1
   ]
 options:
   logging: CLOUD_LOGGING_ONLY
