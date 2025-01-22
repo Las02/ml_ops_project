@@ -1,5 +1,3 @@
-from random import shuffle
-
 import torch
 import torch.nn.functional as F
 import typer
