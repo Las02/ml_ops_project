@@ -609,7 +609,14 @@ We ended up all using the same project on the Google Cloud Platform - we just ad
 >
 > Answer:
 
---- question 30 fill here ---
+One of the biggest challenges we faced in the project was getting Docker to work smoothly with all our dependencies, both locally and on the Google Cloud Platform (GCP). It was especially tricky because we couldn’t figure out how to rebuild our Docker containers quickly on GCP. Locally, we could rely on caching to speed things up, but on GCP, the cache just wouldn’t cooperate. This meant every rebuild took forever, making it hard to test and refine our setup efficiently.
+
+On top of that, we ran into a lot of headaches with Google permissions. Pulling the Docker container from the Artifact Registry to our local machines via the command line turned into a major time sink. We spent hours debugging permission issues, tweaking roles, and figuring out the right settings in GCP’s IAM system. It was frustrating at times, but it also pushed us to learn a lot about how cloud infrastructure works. In the end, we got through it, but it definitely tested our patience and problem-solving skills!
+
+Additionally early on, we struggled to find a good dataset. Initially, we wanted to build an English-to-Shakespearean translator, but parsing the available data proved too complex and time-consuming. This led us to pivot to a Danish-to-English translator, which had cleaner, more accessible datasets. While the shift was a setback, it allowed us to focus on building a functional model without getting stuck in data preparation. Nonetheless looking at the raw data we still notices a lot of wierd translations which likely will affect model performance.
+
+
+
 
 ### Question 31
 
