@@ -325,23 +325,17 @@ Additionally, we use caching during the installation of dependencies by leveragi
 >
 > Answer:
 
-We used a Makefile to structure our workflow, simplifying the cexecution of various tasks like data preparation, testing, and training. Each Makefile target represents a specific step in the workflow. For example, the setup_data target downloads the dataset, splits it into training and test subsets, and tokenizes it for use with our T5 model:
-
+We used a Makefile to structure our workflow, simplifying the execution of various tasks like data preparation, testing, and training. Each Makefile target represents a specific step in the workflow. E.g., the train target:
 
 ```make
-setup_data:
-	# download data and split it
-	python src/ml_ops_project/data.py download-data
-	python src/ml_ops_project/data.py split-data
-	python src/ml_ops_project/data.py tokenize-data
+train:
+	# Train model
+	python  src/ml_ops_project/train.py train
 ```
 
-For configuration of our model parameters and training parameters, we created model_config.yaml and train_config.yaml files, which contains the specified parameters. The model_config.yaml is used to initialize a T5Config object, and then passed to the T5ForConditionalGeneration model to configure it.
-Regarding the training parameters, 
+We used Typer to parse arguments, thus the above will run the train function in the train.py file.
 
-todo: aendre til at den bruger train_config.yaml fil i stedet for hardcoded.
-
-
+Regarding configuration, we made use of config files to specify what parameters were used to initialize and train the model.
 
 ### Question 13
 
@@ -356,10 +350,8 @@ todo: aendre til at den bruger train_config.yaml fil i stedet for hardcoded.
 >
 > Answer:
 
-As described above, we made use of config files to specify what parameters were used to initialize and train the model. 
-Following is an overview of the steps needed in order to reproduce an experiment:
-
-todo: include steps to reproduce experiment 
+As stated above, we made use of config files in our project. For configuration of our model parameters and training parameters, we created model_config.yaml and train_config.yaml files, which contains the specified parameters. The model_config.yaml is used to initialize a T5Config object, and then passed to the T5ForConditionalGeneration model to configure it.
+Regarding the training parameters, the parameters are loaded from the train_config.yaml file during the training loop. We integrated Weights & Biases for experiment logging. Thus the training parameters are logged in Weights & Biases. Furthermore, the model is saved as an artefact. Therefore, in order to reproduce an experiment, a team member should use the same version of the config files. 
 
 ### Question 14
 
