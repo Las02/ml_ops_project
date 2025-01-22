@@ -11,6 +11,7 @@ import wandb
 from ml_ops_project.data import OpusDataset
 from ml_ops_project.model import *
 from ml_ops_project.model import initialize_model, load_model_config
+from ml_ops_project.evaluation import sacrebleu
 
 # Load Data
 app = typer.Typer()
@@ -49,16 +50,14 @@ def train():
     # Set optimizer
     optimizer = AdamW(model.parameters(), lr=learning_rate)
 
-    shuffle = True
     train_dataset = OpusDataset("data/test_data/test_data.txt")
-    train_dataloader = DataLoader(train_dataset, batch_size=2, shuffle=shuffle)
+    test_dataset = OpusDataset("data/test_data/test_data.txt")
+    val_dataset = OpusDataset("data/test_data/test_data.txt")
 
-    test_dataloader = DataLoader(
-        OpusDataset("data/test_data/test_data.txt"), batch_size=2, shuffle=shuffle
-    )
-    val_dataloader = DataLoader(
-        OpusDataset("data/test_data/test_data.txt"), batch_size=2, shuffle=shuffle
-    )
+    shuffle = True
+    train_dataloader = DataLoader(train_dataset, batch_size=2, shuffle=shuffle)
+    test_dataloader = DataLoader(test_dataset, batch_size=len(test_dataset), shuffle=shuffle)
+    val_dataloader = DataLoader(val_dataset, batch_size=len(val_dataset), shuffle=shuffle)
 
     with wandb.init(
         # set the wandb project where this run will be logged
@@ -79,10 +78,14 @@ def train():
             logger.info(f"starting: epoch: {epoch}")
             train_epoch(model, optimizer, train_dataset, train_dataloader)
             # Apply model to test data
-            test_epoch(model, optimizer, test_dataloader, loss_name="test_loss")
+            test_val_epoch(
+                model, optimizer, test_dataloader, loss_name="test_loss", test_dataset=test_dataset
+            )
 
         # Apply model to val data
-        test_epoch(model, optimizer, val_dataloader, loss_name="val_loss")
+        test_val_epoch(
+            model, optimizer, val_dataloader, loss_name="val_loss", test_dataset=val_dataset
+        )
 
         torch.save(model.state_dict(), "models/model.pt")
         artifact = wandb.Artifact(
@@ -115,17 +118,19 @@ def train_epoch(model, optimizer, dataset, dataloader):
         wandb.log({"loss": loss})
 
 
-def test_epoch(model, optimizer, dataloader, loss_name):
+def test_val_epoch(model, optimizer, dataloader, loss_name, test_dataset):
     logger.info(f"Starting for {loss_name}")
     model.eval()
+    total_loss = 0
     for truth, input in dataloader:
         outputs = model(input_ids=input, labels=truth)
         preds = F.softmax(outputs.logits, dim=-1).argmax(dim=-1)
 
         loss = outputs.loss
 
-        logger.info(f"{log} {loss}")
-        wandb.log({f"{log}": loss})
+    logger.info(f"{loss_name} {loss}")
+    wandb.log({f"{loss_name}": loss})
+    sacrebleu(model, dataloader, test_dataset=test_dataset, batch_size=2)
     model.train()
 
 

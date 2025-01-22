@@ -425,7 +425,7 @@ todo: write about profiling?
 >
 > Answer:
 
---- question 17 fill here ---
+We used Compute Engine, Artifact Registry, and Cloud Build in our project. Compute Engine is used to create and run virtual machines, giving us a separate environment to work with. Artifact Registry is used for building and storing container images. We also used Cloud Build to automate the process of building and deploying containers, which streamlined our workflow.
 
 ### Question 18
 
