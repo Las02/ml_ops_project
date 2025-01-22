@@ -59,7 +59,7 @@ def train():
     val_dataset = OpusDataset("data/raw/validation.txt")
 
     shuffle = True
-    train_dataloader = DataLoader(train_dataset, batch_size=16, shuffle=shuffle)
+    train_dataloader = DataLoader(train_dataset, batch_size=24, shuffle=shuffle)
     test_dataloader = DataLoader(test_dataset, batch_size=len(test_dataset), shuffle=shuffle)
     val_dataloader = DataLoader(val_dataset, batch_size=len(val_dataset), shuffle=shuffle)
 
@@ -139,8 +139,8 @@ def test_val_epoch(model, optimizer, dataloader, loss_name, test_dataset, device
     model.eval()
     total_loss = 0
     for truth, input in dataloader:
-        truth = truth.to_device(device)
-        input = input.to_device(device)
+        truth = truth.to(device)
+        input = input.to(device)
 
         outputs = model(input_ids=input, labels=truth)
         preds = F.softmax(outputs.logits, dim=-1).argmax(dim=-1)
