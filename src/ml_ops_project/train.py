@@ -60,8 +60,8 @@ def train():
 
     shuffle = True
     train_dataloader = DataLoader(train_dataset, batch_size=16, shuffle=shuffle)
-    test_dataloader = DataLoader(test_dataset, batch_size=16, shuffle=shuffle)
-    val_dataloader = DataLoader(val_dataset, batch_size=16, shuffle=shuffle)
+    test_dataloader = DataLoader(test_dataset, batch_size=8, shuffle=shuffle)
+    val_dataloader = DataLoader(val_dataset, batch_size=8, shuffle=shuffle)
 
     model.to(device)
 
@@ -149,6 +149,8 @@ def test_val_epoch(model, optimizer, dataloader, loss_name, test_dataset, device
 
         loss = outputs.loss
         total_loss += loss
+        del truth
+        del input
     total_loss = total_loss / len(test_dataset)
 
     logger.info(f"{loss_name} {total_loss}")
