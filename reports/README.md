@@ -561,7 +561,8 @@ As mentioned earlier we managed to get everything set up to train our model in t
 >
 > Answer:
 
---- question 27 fill here ---
+We ended up all using the same project on the Google Cloud Platform - we just added everyone to a project and gave them the correct permission. We only ended up using $1.07 as we did not do the actual training on GCP and instead used the HPC for the training. Working on the cloud seemed much more complicated compared to just using an HPC. On the cloud there exists so many different applications with slightly different user cases - which makes it difficult to navigate them. Additionally the GUI interface becomes annoying after awhile, although we suppose this could be fixed by getting more fammiliar with the CLI interface. Notheless the value of using a GCP is clear as it makes it easier to scale applications and keep costs down - especially if you dont have access to a HPC system - or want to host an application which many businesses rely on. 
+
 
 ### Question 28
 
@@ -583,7 +584,7 @@ As mentioned earlier we managed to get everything set up to train our model in t
 
 > **Include a figure that describes the overall architecture of your system and what services that you make use of.**
 > **You can take inspiration from [this figure](figures/overview.png). Additionally, in your own words, explain the**
-> **overall steps in figure.**
+> **overall steps in figure.**Engine
 >
 > Recommended answer length: 200-400 words
 >
