@@ -433,6 +433,7 @@ We used Compute Engine, Artifact Registry, and Cloud Build in our project. Compu
 > Answer:
 
 --- question 18 fill here ---
+We started off using the compute engine to train our models. Here we started off testing whether our dockerized application (build using cloud build and stored on artifact registry) worked using an E2 instance with the minimum compute specs - but with additional disk storage to make room for the dataset and the large pytorch dependencies. Later when we had figured out how to get our dockerized application to run correctly, we change to a larger VM. Here we swapped to an E2 instance with the "e2-highcpu-16" but we still had pretty slow performance - and our plan was therefore to swap to a VM with GPU support. Unfortunatly, since we did not request GPU access in time we did not were not able to use the VM with GPU support. We therefore choose to train our model on the DTU HPC. Here the model was trained on a Tesla V100-SXM2.
 
 ### Question 19
 
