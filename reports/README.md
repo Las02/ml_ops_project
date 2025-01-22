@@ -368,13 +368,15 @@ Regarding the training parameters, the parameters are loaded from the train_conf
 >
 > Answer:
 
-As seen in the attached screenshot, we have tracked several metrics for our experiments to evaluate and compare model performance effectively.
-Loss: The loss curves for all models are tracked during training. Loss is a crucial metric as it directly reflects how well the model predictions align with the ground truth.
-BLEU Score: This metric is logged to evaluate the performance of our models on a natural language processing task. BLEU score provides insights into how well the model-generated text aligns with the reference text, which is important for machine translation  applications.
-<!-- Test Loss: By monitoring test loss, we ensure that the models generalize well to unseen data and check for any signs of overfitting. A consistent reduction in test loss validates that the model is robust.
-Validation Loss: Validation loss helps in hyperparameter tuning and serves as an indicator for early stopping during training to prevent overfitting. -->
+![Bucket](figures/wandb.png)
 
-todo: insert screenshot(s)
+As seen in the attached screenshot, we primarily focused on tracking loss across our models during training. Loss is a fundamental metric because it directly reflects how well the model predictions align with the ground truth, making it an essential indicator of model performance during the learning process. While we explored the possibility of tracking other metrics, we ultimately decided to log only loss during training to keep our experiments focused.
+
+Although accuracy is a commonly logged metric in many machine learning tasks, we determined it would provide limited insight for our specific application, as our model is designed for translation rather than classification. Accuracy does not capture the subtleties of sequence-based tasks like translation, where partial correctness is significant.
+
+One metric we chose to evaluate only after training was the BLEU Score, which is particularly relevant in natural language processing tasks like machine translation. BLEU measures how well the model-generated text aligns with the reference text, providing valuable insights into translation quality. Its post-training evaluation allowed us to compare models and identify which configurations worked best for our task.
+
+We ultimately did not conduct hyperparameter sweeps, as the focus of our project was on other aspects of the problem rather than optimizing the model extensively. However, had we pursued sweeps, we could have explored different hyperparameters such as learning rate, batch sizes and dropout rate.
 
 ### Question 15
 
