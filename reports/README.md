@@ -447,7 +447,6 @@ We started off using the compute engine to train our models. Here we started off
 >
 > Answer:
 
---- question 19 fill here ---
 [Bucket](figures/bucket.png)
 
 ### Question 20
