@@ -599,6 +599,19 @@ We ended up all using the same project on the Google Cloud Platform - we just ad
 
 --- question 29 fill here ---
 
+The developer begins by cloning the GitHub repository to work on the project. The repository is configured with GitHub Actions to automate workflows, including code format checks, pre-commit validations, and test execution, enabling continuous integration and minimizing the risk of committing errors.
+
+The Makefile provides streamlined commands to facilitate project tasks:
+
+1. Run ```make setup_data``` to retrieve and process the required data. The data is collected from Huggingface
+2. Use ```make tests``` to execute tests and ensure code integrity.
+3. Use ```make train``` to train the model. The model is also collected from Huggingface
+
+To build the Docker image, run make build_cloud, which constructs the Docker image and pushes it to the Google Cloud Artifact Registry. Once the image is available, a Google Compute Engine VM instance can be launched to train the model. The training process automatically logs results and stores the model on Weights & Biases (WandB).
+
+For end users, the workflow involves cloning the GitHub repository and initializing the API. The API allows users to translate Danish sentences into English using the deployed model, which runs on Google Cloud infrastructure.
+
+
 ### Question 30
 
 > **Discuss the overall struggles of the project. Where did you spend most time and what did you do to overcome these**
