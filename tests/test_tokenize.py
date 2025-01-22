@@ -36,7 +36,7 @@ class TestTokenizer:
         assert all(isinstance(x, int) for x in input_ids)
 
     def test_dataloader_full(self):
-        dataset = OpusDataset("data/processed/train.txt")
+        dataset = OpusDataset("data/test_data/test_data.txt")
         dataloader = DataLoader(dataset, batch_size=2, shuffle=False)
         # Get the first batch of data
 
@@ -44,7 +44,7 @@ class TestTokenizer:
             pass
 
 
-# def test_dataloader_detokenize():
+# def test_dataloader_detoke ize():
 #     dataset = OpusDataset("data/test_data/test_data.txt")
 #     train_dataloader = DataLoader(dataset, batch_size=1, shuffle=False)
 #     dataset.decode(next(iter(train_dataloader))[1])

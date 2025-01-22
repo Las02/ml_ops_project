@@ -8,25 +8,25 @@ RUN apt update && \
 
 EXPOSE 8080
 
-# RUN apt install make
-#
-# COPY requirements.txt requirements.txt
-# COPY pyproject.toml pyproject.toml
-# COPY src/ src/
-# COPY data/ data/
-# COPY configs/ configs/
-# COPY Makefile Makefile
-#
-# # Set working directory
-# WORKDIR /
-#
-# # Install dependencies
-# #RUN pip install -r requirements.txt --no-cache-dir
-# RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements.txt
-# RUN pip install . --no-deps --no-cache-dir
-#
-# RUN make setup_data
-#
-# ENTRYPOINT ["make", "train"]
+RUN apt install make
+
+COPY requirements.txt requirements.txt
+COPY pyproject.toml pyproject.toml
+COPY src/ src/
+COPY data/ data/
+COPY configs/ configs/
+COPY Makefile Makefile
+
+# Set working directory
+WORKDIR /
+
+# Install dependencies
+#RUN pip install -r requirements.txt --no-cache-dir
+RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements.txt
+RUN pip install . --no-deps --no-cache-dir
+
+RUN make setup_data
+
+ENTRYPOINT ["make", "train"]
 #
 #
