@@ -16,9 +16,11 @@ from ml_ops_project.evaluation import sacrebleu
 # Load Data
 app = typer.Typer()
 
+
 @app.command()
 def none():
     pass
+
 
 @app.command()
 def train():
