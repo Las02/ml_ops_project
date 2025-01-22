@@ -43,6 +43,7 @@ def train():
         if torch.backends.mps.is_available()
         else "cpu"
     )
+    logger.warning(f"Using device: {device}")
 
     # Make dir for saving models if not exists
     Path("models/").mkdir(exist_ok=True)
@@ -58,7 +59,7 @@ def train():
     val_dataset = OpusDataset("data/raw/validation.txt")
 
     shuffle = True
-    train_dataloader = DataLoader(train_dataset, batch_size=2, shuffle=shuffle)
+    train_dataloader = DataLoader(train_dataset, batch_size=10, shuffle=shuffle)
     test_dataloader = DataLoader(test_dataset, batch_size=len(test_dataset), shuffle=shuffle)
     val_dataloader = DataLoader(val_dataset, batch_size=len(val_dataset), shuffle=shuffle)
 
