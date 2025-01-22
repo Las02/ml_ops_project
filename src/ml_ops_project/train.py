@@ -59,7 +59,7 @@ def train():
     val_dataset = OpusDataset("data/raw/validation.txt")
 
     shuffle = True
-    train_dataloader = DataLoader(train_dataset, batch_size=16, shuffle=shuffle)
+    train_dataloader = DataLoader(train_dataset, batch_size=8, shuffle=shuffle)
     test_dataloader = DataLoader(test_dataset, batch_size=len(test_dataset), shuffle=shuffle)
     val_dataloader = DataLoader(val_dataset, batch_size=len(val_dataset), shuffle=shuffle)
 
@@ -132,6 +132,8 @@ def train_epoch(model, optimizer, dataset, dataloader, device):
 
         logger.info(f"loss {loss}")
         wandb.log({"loss": loss})
+        del truth
+        del input
 
 
 def test_val_epoch(model, optimizer, dataloader, loss_name, test_dataset, device):
