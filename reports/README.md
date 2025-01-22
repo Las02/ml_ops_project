@@ -404,9 +404,9 @@ todo: insert screenshot(s)
 >
 > Answer:
 
-Debugging methods varied among our group members. Some used breakpoints and the built-in debugger function in their IDE to step through the code and inspect variable values at different stages. Others preferred print statements to quickly track the flow of execution and identify where the issue might lie. Another group member utilized interactive debugging in Jupyter Notebooks, running code in smaller, isolated cells to more easily identify errors and experiment with potential fixes. 
+Debugging methods varied among our group members. Some used breakpoints and the built-in debugger function in their IDE (vscode) to step through the code and inspect variable values at different stages. Others preferred print statements to quickly track the flow of execution and identify where the issue might lie. Another group member utilized interactive debugging in Jupyter Notebooks, running code in smaller, isolated cells to more easily identify errors and experiment with potential fixes. 
+Although we didn't profile our code, doing so would have been beneficial to identify bottle necks and inefficient code, and thereby optimize runtime and code quality. 
 
-todo: write about profiling?
 
 ## Working in the cloud
 
