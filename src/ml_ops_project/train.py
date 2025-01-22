@@ -1,12 +1,13 @@
 import torch
 import torch.nn.functional as F
 import typer
-import wandb
+import yaml
 from loguru import logger
 from torch.optim import AdamW
-import yaml
 from torch.utils.data import DataLoader
 from tqdm.auto import tqdm
+
+import wandb
 from ml_ops_project.data import OpusDataset
 from ml_ops_project.model import *
 from ml_ops_project.model import initialize_model, load_model_config
@@ -14,9 +15,11 @@ from ml_ops_project.model import initialize_model, load_model_config
 # Load Data
 app = typer.Typer()
 
+
 @app.command()
 def none():
     pass
+
 
 @app.command()
 def train():
@@ -46,9 +49,16 @@ def train():
     # Set optimizer
     optimizer = AdamW(model.parameters(), lr=learning_rate)
 
-    # dataset = OpusDataset("data/processed/train.txt")
-    dataset = OpusDataset("data/test_data/test_data.txt")
-    train_dataloader = DataLoader(dataset, batch_size=2, shuffle=False)
+    shuffle = True
+    train_dataset = OpusDataset("data/test_data/test_data.txt")
+    train_dataloader = DataLoader(train_dataset, batch_size=2, shuffle=shuffle)
+
+    test_dataloader = DataLoader(
+        OpusDataset("data/test_data/test_data.txt"), batch_size=2, shuffle=shuffle
+    )
+    val_dataloader = DataLoader(
+        OpusDataset("data/test_data/test_data.txt"), batch_size=2, shuffle=shuffle
+    )
 
     with wandb.init(
         # set the wandb project where this run will be logged
@@ -67,7 +77,12 @@ def train():
                 }
             )
             logger.info(f"starting: epoch: {epoch}")
-            train_epoch(model, optimizer, dataset, train_dataloader)
+            train_epoch(model, optimizer, train_dataset, train_dataloader)
+            # Apply model to test data
+            test_epoch(model, optimizer, test_dataloader, loss_name="test_loss")
+
+        # Apply model to val data
+        test_epoch(model, optimizer, val_dataloader, loss_name="val_loss")
 
         torch.save(model.state_dict(), "models/model.pt")
         artifact = wandb.Artifact(
@@ -98,6 +113,20 @@ def train_epoch(model, optimizer, dataset, dataloader):
 
         logger.info(f"loss {loss}")
         wandb.log({"loss": loss})
+
+
+def test_epoch(model, optimizer, dataloader, loss_name):
+    logger.info(f"Starting for {loss_name}")
+    model.eval()
+    for truth, input in dataloader:
+        outputs = model(input_ids=input, labels=truth)
+        preds = F.softmax(outputs.logits, dim=-1).argmax(dim=-1)
+
+        loss = outputs.loss
+
+        logger.info(f"{log} {loss}")
+        wandb.log({f"{log}": loss})
+    model.train()
 
 
 if __name__ == "__main__":
