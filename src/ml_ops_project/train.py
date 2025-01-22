@@ -49,9 +49,12 @@ def train():
     # Set optimizer
     optimizer = AdamW(model.parameters(), lr=learning_rate)
 
-    train_dataset = OpusDataset("data/test_data/test_data.txt")
-    test_dataset = OpusDataset("data/test_data/test_data.txt")
-    val_dataset = OpusDataset("data/test_data/test_data.txt")
+    # train_dataset = OpusDataset("data/test_data/test_data.txt")
+    # test_dataset = OpusDataset("data/test_data/test_data.txt")
+    # val_dataset = OpusDataset("data/test_data/test_data.txt")
+    train_dataset = OpusDataset("data/processed/train.txt")
+    test_dataset = OpusDataset("data/processed/test.txt")
+    val_dataset = OpusDataset("data/raw/validation.txt")
 
     shuffle = True
     train_dataloader = DataLoader(train_dataset, batch_size=2, shuffle=shuffle)
