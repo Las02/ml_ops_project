@@ -2,15 +2,7 @@
 import typer
 from loguru import logger
 import torch
-from pathlib import Path
-from torch.utils.data import DataLoader
-import torch.nn.functional as F
 import evaluate
-import numpy as np
-import tqdm as tqdm
-from ml_ops_project.data import OpusDataset
-from ml_ops_project.model import load_model_config
-from transformers import T5ForConditionalGeneration
 
 app = typer.Typer()
 
@@ -23,26 +15,18 @@ def postprocess_text(preds, labels):
     return preds, labels
 
 @app.command()
-def evaluate_model(
-    data_path: str = "data/test_data/test_data.txt",
-    model_path: str = "models/model.pt",
-    batch_size: int = 2
-):
-    logger.info("Loading model config")
-    model = torch.load("models/torch_model.pt", map_location="cpu")
-    model.eval()
-
-    logger.info("Loading test data")
-    dataset = OpusDataset(data_path)
-    dataloader = DataLoader(dataset, batch_size=batch_size)
+def evaluate_model(model,
+                   test_dataloader,
+    batch_size: int = 2): 
 
     logger.info("Evaluating model")
+    model.eval()
 
     all_predictions = []
     all_targets = []
 
     with torch.no_grad():
-        for batch_idx, (truth_ids, input_ids) in enumerate(dataloader):
+        for batch_idx, (truth_ids, input_ids) in enumerate(test_dataloader):
 
             generated_tokens = model.generate(
                 input_ids=input_ids,
@@ -75,6 +59,3 @@ def evaluate_model(
     print(f"\nFinal BLEU score: {bleu_score['score']:.4f}\n")
 
     logger.info("Evaluation complete!")
-
-if __name__ == "__main__":
-    app()
