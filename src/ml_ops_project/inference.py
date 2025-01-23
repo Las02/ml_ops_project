@@ -2,14 +2,14 @@ import torch
 from transformers import pipeline, T5Tokenizer, T5ForConditionalGeneration
 from tokenizers.normalizers import Sequence, Replace, Lowercase
 
-def translate_danish_to_english(input_text: str):
+# #Load the base T5 model
+# model = T5ForConditionalGeneration.from_pretrained("google-t5/t5-small")
 
-    #Load the base T5 model
-    model = T5ForConditionalGeneration.from_pretrained("google-t5/t5-small")
+# #Load your custom fine-tuned weights
+# model.load_state_dict(torch.load("models/model.pt", map_location="cpu"))
+# model.eval()
 
-    #Load your custom fine-tuned weights
-    model.load_state_dict(torch.load("models/model.pt", map_location="cpu"))
-    model.eval()
+def translate_danish_to_english(model, input_text: str):
 
     #Load the matching tokenizer
     tokenizer = T5Tokenizer.from_pretrained("google-t5/t5-small")
