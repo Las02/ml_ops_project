@@ -7,6 +7,12 @@ setup_data:
 	python src/ml_ops_project/data.py download-data
 	python src/ml_ops_project/data.py split-data
 	python src/ml_ops_project/data.py tokenize-data
+setup_data_from_cloud:
+	# download data and split it
+	python src/ml_ops_project/data.py download-public-gcs-file train.txt data/raw/train.txt
+	python src/ml_ops_project/data.py download-public-gcs-file validation.txt data/raw/validation.txt
+	python src/ml_ops_project/data.py split-data
+	python src/ml_ops_project/data.py tokenize-data
 test: 
 	# Run all tests
 	python -m pytest
