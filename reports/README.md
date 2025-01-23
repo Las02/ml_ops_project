@@ -518,8 +518,10 @@ We wrote and API for our model, using FastAPI. We made a simple api containing o
 > *`curl -X POST -F "file=@file.json"<weburl>`*
 >
 > Answer:
-
---- question 24 fill here ---
+We deployed our API both locally and in the cloud. Firstly we tested the model locally, and later we then deployed it to the cloud. For deploying the model in the cloud we dockerized the application and then used the the Google Cloud build to build the container and push the container to the artifact repository. We then used Cloud Run to deploy our containermaking sure that it exposed port 8080. The API for our model can be called with curl by:  
+```
+```
+This would then translate the sentence "hej med dig" to english. 
 
 ### Question 25
 

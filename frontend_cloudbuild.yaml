@@ -7,7 +7,7 @@ steps:
     '-t',
     'europe-west9-docker.pkg.dev/$PROJECT_ID/ml-ops/docker_image_2',
     '-f',
-    './dockerfiles/api.dockerfile'
+    './dockerfiles/frontend.dockerfile'
   ]
   env: 'DOCKER_BUILDKIT=1'
 - name: 'gcr.io/cloud-builders/docker'
