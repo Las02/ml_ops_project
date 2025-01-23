@@ -12,6 +12,7 @@ from ml_ops_project.data import OpusDataset
 from ml_ops_project.evaluation import sacrebleu
 from ml_ops_project.model import *
 from ml_ops_project.model import initialize_model, load_model_config
+from ml_ops_project.bucket import upload_blob
 
 # Load Data
 app = typer.Typer()
@@ -111,6 +112,11 @@ def train():
         artifact.add_file("models/model.pt")
         run.log_artifact(artifact)
 
+        upload_blob(
+            bucket_name="mlops-models-2025",
+            source_file_name="models/model.pt",
+            destination_blob_name="model.pt"
+        )
 
 def train_epoch(model, optimizer, dataset, dataloader, device):
     for truth, input in dataloader:
