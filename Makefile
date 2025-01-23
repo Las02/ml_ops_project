@@ -17,4 +17,13 @@ build_cloud:
 	gcloud builds submit --config=cloudbuild.yaml
 run_streamlit:
 	python -m streamlit run src/ml_ops_project/streamlit.py 
+start_backend_and_frontend:
+	fastapi run --reload src/ml_ops_project/api.py
+	python -m streamlit run src/ml_ops_project/streamlit.py 
+build_docker_api:
+	sudo docker build -t api . -f dockerfiles/api.dockerfile
+run_docker_api_locally:
+	sudo docker run --rm --name my_fastapi_app -p 8000:8000 api
+api_build_cloud:
+	gcloud builds submit --config=api_cloudbuild.yaml
 
