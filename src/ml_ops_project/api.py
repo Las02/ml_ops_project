@@ -41,16 +41,16 @@ def main(input: str):
     # # Move the model to the appropriate device
     # model.to(device)
     #
-
+    # %%
     tokenizer = T5Tokenizer.from_pretrained("google-t5/t5-small")
-    model = lambda x: "hello"
+    model = lambda x: f"{input} hello"
 
-    input = tokenizer(
-        [input],
-        return_tensors="pt",
-        padding="do_not_pad",
-    ).input_ids
-
+    # input = tokenizer(
+    #     [input],
+    #     return_tensors="pt",
+    #     padding="do_not_pad",
+    # ).input_ids
+    # %%
     return model(input)
 
     if __name__ == "__main__":

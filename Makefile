@@ -15,3 +15,6 @@ train:
 	python  src/ml_ops_project/train.py train
 build_cloud:
 	gcloud builds submit --config=cloudbuild.yaml
+run_streamlit:
+	python -m streamlit run src/ml_ops_project/streamlit.py 
+
