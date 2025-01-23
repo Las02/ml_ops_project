@@ -9,7 +9,7 @@ While one of our goals of the project is to produce a model which is capable of 
 
 # Installation
 ```
-conda create -n ml_ops 'python==3.12.2'
+conda create -n ml_ops 'python==3.11'
 conda activate ml_ops
 pip install -e .
 ```
