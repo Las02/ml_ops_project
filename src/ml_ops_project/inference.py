@@ -1,5 +1,5 @@
-from transformers import pipeline, T5Tokenizer
-from tokenizers.normalizers import Sequence, Replace, Lowercase
+from tokenizers.normalizers import Lowercase, Replace, Sequence
+from transformers import T5Tokenizer, pipeline
 
 # #Load the base T5 model
 # model = T5ForConditionalGeneration.from_pretrained("google-t5/t5-small")

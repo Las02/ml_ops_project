@@ -1,47 +1,38 @@
+from contextlib import asynccontextmanager
+
+import torch
+import yaml
 from fastapi import FastAPI
-from transformers import T5Tokenizer
+from tokenizers.normalizers import Lowercase, Replace, Sequence
+from transformers import T5ForConditionalGeneration, T5Tokenizer, pipeline
+
+from ml_ops_project.inference import translate_danish_to_english
 
 
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
+    # Load the base T5 model
+    app.model = T5ForConditionalGeneration.from_pretrained("google-t5/t5-small")
+    # Load your custom fine-tuned weights
+    app.model.load_state_dict(torch.load("models/model.pt", map_location="cpu"))
+    app.model.eval()
+
+    yield
+    # Shutdown
+    del app.state.model
+
+
+app = FastAPI(lifespan=lifespan)
 
 
 @app.post("/")
 def main(input: str):
-    ## Load the model configuration
-    # config = load_model_config()
-    #
-    # # Reinitialize the model architecture
-    # model = initialize_model(config)
-    #
-    # # Set the device
-    # device = torch.device(
-    #     "cuda"
-    #     if torch.cuda.is_available()
-    #     else "mps"
-    #     if torch.backends.mps.is_available()
-    #     else "cpu"
-    # )
-    #
-    # device = torch.device("cpu")  # Use CPU for validation
-    #
-    # # Load the saved state dictionary
-    # state_dict = torch.load("models/model.pt", map_location=device)
-    # model.load_state_dict(state_dict)
-    #
-    # # Move the model to the appropriate device
-    # model.to(device)
-    #
+    return translate_danish_to_english(app.model, input)
 
-    tokenizer = T5Tokenizer.from_pretrained("google-t5/t5-small")
-    model = lambda x: "hello"
+    # model = lambda x: x[::-1]
+    # return model(input)
 
-    input = tokenizer(
-        [input],
-        return_tensors="pt",
-        padding="do_not_pad",
-    ).input_ids
 
-    return model(input)
-
-    if __name__ == "__main__":
-        app()
+if __name__ == "__main__":
+    app()
