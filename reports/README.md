@@ -604,20 +604,26 @@ We ended up all using the same project on the Google Cloud Platform - we just ad
 >
 > Answer:
 
---- question 29 fill here ---
+![Overview](figures/overview.png)
 
 The developer begins by cloning the GitHub repository to work on the project. The repository is configured with GitHub Actions to automate workflows, including code format checks, pre-commit validations, and test execution, enabling continuous integration and minimizing the risk of committing errors.
 
-The Makefile provides streamlined commands to facilitate project tasks:
+The `Makefile` provides streamlined commands to facilitate project tasks:
 
-1. Run ```make setup_data``` to retrieve and process the required data. The data is collected from Huggingface
-2. Use ```make tests``` to execute tests and ensure code integrity.
-3. Use ```make train``` to train the model. The model is also collected from Huggingface
+1. Run `make setup_data` to retrieve and process the required data. The data is collected from Huggingface.
+2. Use `make tests` to execute tests and ensure code integrity.
+3. Use `make train` to train the model. The model is also collected from Huggingface.
+4. Use `make build_cloud` to build the Docker image and push it to the Google Cloud Artifact Registry.
+5. Use `make run_streamlit` to launch the Streamlit frontend locally.
+6. Use `make start_backend_and_frontend` to run both the FastAPI backend and Streamlit frontend simultaneously.
+7. Use `make build_docker_api` to build the Docker image for the FastAPI backend.
+8. Use `make run_docker_api_locally` to run the FastAPI backend locally using Docker.
+9. Use `make api_build_cloud` and `make frontend_build_cloud` to build and deploy the backend and frontend to Google Cloud.
+10. Use `make download_model` to download the trained model from Google Cloud Storage.
 
-To build the Docker image, run make build_cloud, which constructs the Docker image and pushes it to the Google Cloud Artifact Registry. Once the image is available, a Google Compute Engine VM instance can be launched to train the model. The training process automatically logs results and stores the model on Weights & Biases (WandB).
+To build the Docker image, run `make build_cloud`, which constructs the Docker image and pushes it to the Google Cloud Artifact Registry. Once the image is available, a Google Compute Engine VM instance can be launched to train the model. The training process automatically logs results and stores the model on Weights & Biases (WandB).
 
-For end users, the workflow involves cloning the GitHub repository and initializing the API. The API allows users to translate Danish sentences into English using the deployed model, which runs on Google Cloud infrastructure.
-
+For the end user, the model can be used through the API that runs on Google Engine. If the user wants to run the model locally, the repo can be cloned and make run_docker_api_locally can be run. 
 
 ### Question 30
 
