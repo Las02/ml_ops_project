@@ -594,7 +594,6 @@ We ended up all using the same project on the Google Cloud Platform - we just ad
 > **overall steps in figure.**Engine
 >
 > Recommended answer length: 200-400 words
->
 > Example:
 >
 > *The starting point of the diagram is our local setup, where we integrated ... and ... and ... into our code.*
