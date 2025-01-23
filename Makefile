@@ -15,3 +15,5 @@ train:
 	python  src/ml_ops_project/train.py train
 build_cloud:
 	gcloud builds submit --config=cloudbuild.yaml
+download_model:
+	python src/ml_ops_project/bucket.py download-blob
