@@ -115,8 +115,9 @@ def train():
         upload_blob(
             bucket_name="mlops-models-2025",
             source_file_name="models/model.pt",
-            destination_blob_name="model.pt"
+            destination_blob_name="model.pt",
         )
+
 
 def train_epoch(model, optimizer, dataset, dataloader, device):
     for truth, input in dataloader:
