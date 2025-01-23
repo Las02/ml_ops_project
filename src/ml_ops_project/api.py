@@ -1,10 +1,8 @@
 from contextlib import asynccontextmanager
 
 import torch
-import yaml
 from fastapi import FastAPI
-from tokenizers.normalizers import Lowercase, Replace, Sequence
-from transformers import T5ForConditionalGeneration, T5Tokenizer, pipeline
+from transformers import T5ForConditionalGeneration
 
 from ml_ops_project.inference import translate_danish_to_english
 
