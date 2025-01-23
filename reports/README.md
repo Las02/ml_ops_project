@@ -58,7 +58,7 @@ will check the repositories and the code to verify your answers.
     are using (M2+M6)
 * [X] Remember to comply with good coding practices (`pep8`) while doing the project (M7)
 * [X] Do a bit of code typing and remember to document essential parts of your code (M7)
-* [ ] Setup version control for your data or part of your data (M8)
+* [X] Setup version control for your data or part of your data (M8)
 * [X] Add command line interfaces and project commands to your code where it makes sense (M9)
 * [X] Construct one or multiple docker files for your code (M10)
 * [X] Build the docker files locally and make sure they work as intended (M10)
@@ -84,12 +84,12 @@ will check the repositories and the code to verify your answers.
 * [X] Create a data storage in GCP Bucket for your data and link this with your data version control setup (M21)
 * [X] Create a trigger workflow for automatically building your docker images (M21)
 * [X] Get your model training in GCP using either the Engine or Vertex AI (M21)
-* [ ] Create a FastAPI application that can do inference using your model (M22)
-* [ ] Deploy your model in GCP using either Functions or Run as the backend (M23)
+* [X] Create a FastAPI application that can do inference using your model (M22)
+* [X] Deploy your model in GCP using either Functions or Run as the backend (M23)
 * [ ] Write API tests for your application and setup continues integration for these (M24)
 * [ ] Load test your application (M24)
 * [ ] Create a more specialized ML-deployment API using either ONNX or BentoML, or both (M25)
-* [ ] Create a frontend for your API (M26)
+* [X] Create a frontend for your API (M26)
 
 ### Week 3
 
@@ -106,10 +106,10 @@ will check the repositories and the code to verify your answers.
 
 * [ ] Write some documentation for your application (M32)
 * [ ] Publish the documentation to GitHub Pages (M32)
-* [ ] Revisit your initial project description. Did the project turn out as you wanted?
-* [ ] Create an architectural diagram over your MLOps pipeline
-* [ ] Make sure all group members have an understanding about all parts of the project
-* [ ] Uploaded all your code to GitHub
+* [X] Revisit your initial project description. Did the project turn out as you wanted?
+* [X] Create an architectural diagram over your MLOps pipeline
+* [X] Make sure all group members have an understanding about all parts of the project
+* [X] Uploaded all your code to GitHub
 
 ## Group information
 
@@ -244,7 +244,7 @@ We've implemented a total of 8 tests using pytest. The tests focus on ensuring t
 >
 > Answer:
 
-The total code coverage is 74%, meaning that most of our code is tested. We could probably expand some test to include more lines of code, but we can see from the coverage report that the most important feautures are tested. 
+The total code coverage is 42%, meaning that some of our code is tested. We could probably expand some test to include more lines of code, but we can see from the coverage report that the most important feautures are tested. 
 
 Even with a near 100% code coverage it is not certain that the code would be error free. As the code coverage report how many lines of code are run when your tests are executed, it would still be possible to have errors hidden somewhere. But it is a good indicator that the code is thoroughly tested for potential bugs.
 
