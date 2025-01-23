@@ -81,7 +81,7 @@ will check the repositories and the code to verify your answers.
 * [X] Add pre-commit hooks to your version control setup (M18)
 * [ ] Add a continues workflow that triggers when data changes (M19)
 * [ ] Add a continues workflow that triggers when changes to the model registry is made (M19)
-* [ ] Create a data storage in GCP Bucket for your data and link this with your data version control setup (M21)
+* [X] Create a data storage in GCP Bucket for your data and link this with your data version control setup (M21)
 * [X] Create a trigger workflow for automatically building your docker images (M21)
 * [X] Get your model training in GCP using either the Engine or Vertex AI (M21)
 * [ ] Create a FastAPI application that can do inference using your model (M22)
@@ -166,7 +166,7 @@ We used the T5Tokenizer from Transformers to preprocess the dataset, ensuring th
 >
 > Answer:
 
-We used a combination of Conda and pip for managing our project dependencies. To set up an exact copy of our development environment, a new team member should clone the repository and cd into it. To initialize an environment based on our requirements, one should run the following:
+We used a combination of Conda and pip for managing our project dependencies. To set up an exact copy of our environment, a new team member should clone the repository and cd into it. To initialize an environment based on our requirements, one should run the following:
 
 ```bash
 conda create -n ml_ops 'python==3.11'
@@ -191,7 +191,7 @@ We log the needed packages to run our project in a requirements.txt file. Furthe
 > Answer:
 
 We initialized our project using the given cookiecutter template in this course (https://github.com/SkafteNicki/mlops_template). We've largely followed  this standard for organizing the code in our project. 
-We've filled out the data (split into raw and processed), dockerfiles (containing the dockerfiles used in this project), models (for saving trained models for later use), reports (for the project), src (for relevant python scripts) and tests (for pytests) folders according to the standard. However, we have removed the notebooks folder as the project doesn't involve any. Furthermore, doing development of our framework we added a data/test_data folder for a subset of our dataset.
+We've filled out the data folder(split into raw, which is downloaded from a gcp bucket,and afterwards processed), dockerfiles (containing the dockerfiles used in this project), reports (for the project), src (for relevant python scripts) and tests (for pytests) folders according to the standard. However, we have removed the notebooks folder as the project doesn't involve any. Models are saved in a gcp bucket. Furthermore, doing development of our framework we added a data/test_data folder for a subset of our dataset.
 
 todo: delete unused folders and update this (103 words)
 
@@ -430,7 +430,7 @@ Although we didn't profile our code, doing so would have been beneficial to iden
 >
 > Answer:
 
-We used Compute Engine, Artifact Registry, and Cloud Build in our project. Compute Engine is used to create and run virtual machines, giving us a separate environment to work with. Artifact Registry is used for building and storing container images. We also used Cloud Build to automate the process of building and deploying containers, which streamlined our workflow.
+We used Compute Engine, Artifact Registry, Bucket and Cloud Build in our project. Compute Engine is used to create and run virtual machines, giving us a separate environment to work with. Artifact Registry is used for building and storing container images. Bucket is for cloud storage. We also used Cloud Build to automate the process of building and deploying containers, which streamlined our workflow. 
 
 ### Question 18
 
@@ -454,7 +454,7 @@ We started off using the compute engine to train our models. Here we started off
 >
 > Answer:
 
-![Bucket](figures/bucket.png)
+![Bucket](figures/list_of_buckets.png)
 
 ### Question 20
 
