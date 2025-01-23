@@ -1,16 +1,6 @@
-import token
-
-import torch
-import yaml
 from fastapi import FastAPI
-from loguru import logger
-from torch.optim import AdamW
-from torch.utils.data import DataLoader
 from transformers import T5Tokenizer
 
-from ml_ops_project.data import OpusDataset
-from ml_ops_project.evaluation import sacrebleu
-from ml_ops_project.model import initialize_model, load_model_config
 
 app = FastAPI()
 
