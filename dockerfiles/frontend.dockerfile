@@ -17,6 +17,6 @@ RUN --mount=type=cache,target=/root/.cache/pip pip install -r frontend_requireme
 RUN pip install . --no-deps --no-cache-dir --verbose
 
 EXPOSE 8080
-ENTRYPOINT ["python", "-m", "streamlit", "run", "ml_ops_project", "--server.port", "8080"]
+ENTRYPOINT ["python", "-m", "streamlit", "run", "src/ml_ops_project/streamlit.py ", "--server.port", "8080"]
 # ENTRYPOINT ["uvicorn", "src/ml_ops_project/api:app", "--host", "0.0.0.0", "--port", "8000"]
 

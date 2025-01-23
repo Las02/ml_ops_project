@@ -16,20 +16,20 @@ steps:
     'push',
     'europe-west9-docker.pkg.dev/$PROJECT_ID/ml-ops/docker_image_2'
   ]
-- name: 'gcr.io/cloud-builders/gcloud'
-  id: 'Deploy to Cloud Run'
-  args: [
-    'run',
-    'deploy',
-    'docker-image-2',
-    '--image',
-    'europe-west9-docker.pkg.dev/$PROJECT_ID/ml-ops/docker_image_2',
-    '--region',
-    'europe-west9',
-    '--platform',
-    'managed',
-    # optional argument if you want to inject secrets as environment variables
-    # '--update-secrets=<env-name-in-container>=<secret-name-in-secrets-manager>:latest'
-  ]
+# - name: 'gcr.io/cloud-builders/gcloud'
+#   id: 'Deploy to Cloud Run'
+#   args: [
+#     'run',
+#     'deploy',
+#     'docker-image-2',
+#     '--image',
+#     'europe-west9-docker.pkg.dev/$PROJECT_ID/ml-ops/docker_image_2',
+#     '--region',
+#     'europe-west9',
+#     '--platform',
+#     'managed',
+#     # optional argument if you want to inject secrets as environment variables
+#     # '--update-secrets=<env-name-in-container>=<secret-name-in-secrets-manager>:latest'
+#   ]
 options:
   logging: CLOUD_LOGGING_ONLY
