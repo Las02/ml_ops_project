@@ -5,8 +5,8 @@ import streamlit as st
 
 
 def request_translate(input):
-    url = "https://docker-image-1-533116583496.europe-west1.run.app"
-    # url = "http://0.0.0.0:8000/"
+    # url = "https://docker-image-1-533116583496.europe-west1.run.app"
+    url = "http://0.0.0.0:8000/"
     headers = {"accept": "application/json"}
     params = {"input": input}
 
@@ -22,9 +22,9 @@ def stream_data():
 
 
 st.write(
-    "Welcome to our english to danish translater. Write your text in the box to translate text."
+    "Welcome to our danish to english translater. Write your text in the box to translate text."
 )
-input_text = st.text_input("Translate from english to danish:")
+input_text = st.text_input("Translate from danish to english:")
 
 
 if len(input_text) != 0:
