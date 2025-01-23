@@ -75,6 +75,5 @@ def test_val(model, dataloader, test_dataset, device):
     # Return the metrics for further analysis or logging
     return average_loss, bleu_score
 
-
 if __name__ == "__main__":
     test_val(model, test_dataloader, test_dataset, device)
