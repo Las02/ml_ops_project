@@ -595,7 +595,7 @@ We ended up all using the same project on the Google Cloud Platform - we just ad
 >
 > Answer:
 
-We implemented a frontend for our API using Streamlit. This decision was made to provide an interactive and user-friendly interface for presenting our translator model. Streamlit was a quick and efficient way to develop the frontend, allowing us to focus on showcasing the model's capabilities without spending excessive time on frontend development.
+We implemented a frontend for our API using Streamlit. This decision was made to provide an interactive and user-friendly interface for presenting our translator model. Streamlit was a quick and efficient way to develop the frontend, allowing us to focus on showcasing the model's capabilities without spending excessive time on frontend development. link: [https://frontend-533116583496.europe-north1.run.app/]
 
 ### Question 29
 
