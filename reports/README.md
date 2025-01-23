@@ -244,7 +244,7 @@ We've implemented a total of 8 tests using pytest. The tests focus on ensuring t
 >
 > Answer:
 
-The total code coverage is 74%, meaning that most of our code is tested. We could probably expand some test to include more lines of code, but we can see from the coverage report that the most important feautures are tested. 
+The total code coverage is 42%, meaning that some of our code is tested. We could probably expand some test to include more lines of code, but we can see from the coverage report that the most important feautures are tested. 
 
 Even with a near 100% code coverage it is not certain that the code would be error free. As the code coverage report how many lines of code are run when your tests are executed, it would still be possible to have errors hidden somewhere. But it is a good indicator that the code is thoroughly tested for potential bugs.
 
