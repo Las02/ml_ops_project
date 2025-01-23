@@ -542,7 +542,7 @@ This would then translate the sentence "hej med dig" to english.
 >
 > Answer:
 
-We did not manage to implement any unit testing or load testing for our API. However, if we were to implement this, we would have followed the M24 module in this course for guidance. For integration testing we would have installed httpx and fastapi.testclient to write relevant tests for functionality (for instance, assert that the api returns an actual translation, which could be to assert that the translation model does not return an empty string). Furthermore, for load testing we would have installed locust, the load-testing tool introtduced in this course, which simulates multiple users interacting with the API. We would do this in order to test the performance of our application, for instance what max capacity is.
+We did not manage to implement any unit testing or load testing for our API. However, if we were to implement this, we would have followed the M24 module in this course for guidance. For functionality testing we would have installed httpx and fastapi.testclient to write relevant tests (for instance, assert that the api returns an actual translation, which could be to assert that the translation model does not return an empty string). Furthermore, for load testing we would have installed locust, the load-testing tool introtduced in this course, which simulates multiple users interacting with the API. We would do this in order to test the performance of our application, for instance what max capacity is.
 
 ### Question 26
 
