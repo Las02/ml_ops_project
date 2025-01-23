@@ -32,5 +32,7 @@ run_docker_api_locally:
 	sudo docker run --rm --name my_fastapi_app -p 8000:8000 api
 api_build_cloud:
 	gcloud builds submit --config=api_cloudbuild.yaml
+frontend_build_cloud:
+	gcloud builds submit --config=frontend_cloudbuild.yaml
 download_model:
 	python src/ml_ops_project/bucket.py download-blob --bucket-name "mlops-models-2025" --source-blob-name "model.pt" --destination-file-name "models/model.pt"

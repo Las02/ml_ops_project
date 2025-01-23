@@ -5,24 +5,17 @@ RUN apt update && \
     apt install --no-install-recommends -y build-essential gcc && \
     apt clean && rm -rf /var/lib/apt/lists/*
 
-RUN apt install make
-
 COPY src src/
 COPY requirements.txt requirements.txt
 COPY requirements_dev.txt requirements_dev.txt
 COPY README.md README.md
 COPY pyproject.toml pyproject.toml
-COPY Makefile Makefile
-
-run mkdir models
 
 # RUN pip install -r requirements.txt --no-cache-dir --verbose
-RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements.txt
+RUN --mount=type=cache,target=/root/.cache/pip pip install -r frontend_requirements.txt
 RUN pip install . --no-deps --no-cache-dir --verbose
 
-run make download_model
-
 EXPOSE 8080
-ENTRYPOINT ["fastapi", "run", "src/ml_ops_project/api.py", "--host", "0.0.0.0", "--port", "8080"]
+ENTRYPOINT ["python", "-m", "streamlit", "run", "ml_ops_project", "--server.port", "8080"]
 # ENTRYPOINT ["uvicorn", "src/ml_ops_project/api:app", "--host", "0.0.0.0", "--port", "8000"]
 

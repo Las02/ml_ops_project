@@ -5,8 +5,8 @@ import streamlit as st
 
 
 def request_translate(input):
-    # url = "https://docker-image-1-533116583496.europe-west1.run.app"
-    url = "http://0.0.0.0:8000/"
+    url = "https://docker-image-1-533116583496.europe-west1.run.app"
+    # url = "http://0.0.0.0:8000/"
     headers = {"accept": "application/json"}
     params = {"input": input}
 

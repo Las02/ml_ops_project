@@ -503,7 +503,7 @@ As mentioned earlier we managed to get everything set up to train our model in t
 >
 > Answer:
 
---- question 23 fill here ---
+We wrote and API for our model, using FastAPI. We made a simple api containing only one option for POST requests from the root directory. Here the argument is a sentence, the API then passes the sentence to the model and tries to translate the sentence and sends the resulting translated sentance back. To not load our model everytime the API was called we implemented the API such that when created it loads the model. Whenever our API is called in then just calls the in-memory model. To do this we used the `@asynccontextmanager` which were explained in the course.
 
 ### Question 24
 
