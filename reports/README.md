@@ -455,6 +455,7 @@ We started off using the compute engine to train our models. Here we started off
 > Answer:
 
 ![Bucket](figures/list_of_buckets.png)
+![Bucket](figures/databucket.png)
 
 ### Question 20
 
