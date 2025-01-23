@@ -1,5 +1,4 @@
-import torch
-from transformers import pipeline, T5Tokenizer, T5ForConditionalGeneration
+from transformers import pipeline, T5Tokenizer
 from tokenizers.normalizers import Sequence, Replace, Lowercase
 
 # #Load the base T5 model
@@ -9,23 +8,25 @@ from tokenizers.normalizers import Sequence, Replace, Lowercase
 # model.load_state_dict(torch.load("models/model.pt", map_location="cpu"))
 # model.eval()
 
-def translate_danish_to_english(model, input_text: str):
 
-    #Load the matching tokenizer
+def translate_danish_to_english(model, input_text: str):
+    # Load the matching tokenizer
     tokenizer = T5Tokenizer.from_pretrained("google-t5/t5-small")
 
-    normalizer = Sequence([
-        Replace("å", "aa"),
-        Replace("ø", "oe"),
-        Replace("æ", "ae"),
-        Lowercase(),
-    ])
+    normalizer = Sequence(
+        [
+            Replace("å", "aa"),
+            Replace("ø", "oe"),
+            Replace("æ", "ae"),
+            Lowercase(),
+        ]
+    )
     tokenizer.normalizer = normalizer
 
     if model.config.decoder_start_token_id is None:
         model.config.decoder_start_token_id = tokenizer.pad_token_id
 
-    #Build a pipeline for translation da->en
+    # Build a pipeline for translation da->en
     translator = pipeline(
         task="translation_da_to_en",
         model=model,
@@ -33,7 +34,7 @@ def translate_danish_to_english(model, input_text: str):
         device=-1,  # run on CPU
     )
 
-    #Translate
+    # Translate
     result = translator(input_text, max_length=240)
 
     # result is a list of dicts [{'translation_text': '...'}]
