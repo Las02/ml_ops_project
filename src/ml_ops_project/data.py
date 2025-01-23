@@ -9,7 +9,6 @@ from torch.utils.data import Dataset
 from transformers import T5Tokenizer
 import requests
 
-from google.cloud import storage 
 
 app = typer.Typer()
 
@@ -179,17 +178,16 @@ def download_data():
 
 
 @app.command()
-def download_public_gcs_file(object_name: str,destination_file_name: str):
+def download_public_gcs_file(object_name: str, destination_file_name: str):
     """Downloads a public file from Google Cloud Storage."""
 
     url = f"https://storage.googleapis.com/data_opus_dk_en/{object_name}"
 
     # Download object from url
     response = requests.get(url)
-    response.raise_for_status()  
+    response.raise_for_status()
 
-
-    # Save object to file 
+    # Save object to file
     with open(destination_file_name, "wb") as file:
         file.write(response.content)
 
