@@ -81,7 +81,7 @@ will check the repositories and the code to verify your answers.
 * [X] Add pre-commit hooks to your version control setup (M18)
 * [ ] Add a continues workflow that triggers when data changes (M19)
 * [ ] Add a continues workflow that triggers when changes to the model registry is made (M19)
-* [ ] Create a data storage in GCP Bucket for your data and link this with your data version control setup (M21)
+* [X] Create a data storage in GCP Bucket for your data and link this with your data version control setup (M21)
 * [X] Create a trigger workflow for automatically building your docker images (M21)
 * [X] Get your model training in GCP using either the Engine or Vertex AI (M21)
 * [ ] Create a FastAPI application that can do inference using your model (M22)
@@ -166,7 +166,7 @@ We used the T5Tokenizer from Transformers to preprocess the dataset, ensuring th
 >
 > Answer:
 
-We used a combination of Conda and pip for managing our project dependencies. To set up an exact copy of our development environment, a new team member should clone the repository and cd into it. To initialize an environment based on our requirements, one should run the following:
+We used a combination of Conda and pip for managing our project dependencies. To set up an exact copy of our environment, a new team member should clone the repository and cd into it. To initialize an environment based on our requirements, one should run the following:
 
 ```bash
 conda create -n ml_ops 'python==3.11'
@@ -191,7 +191,7 @@ We log the needed packages to run our project in a requirements.txt file. Furthe
 > Answer:
 
 We initialized our project using the given cookiecutter template in this course (https://github.com/SkafteNicki/mlops_template). We've largely followed  this standard for organizing the code in our project. 
-We've filled out the data (split into raw and processed), dockerfiles (containing the dockerfiles used in this project), models (for saving trained models for later use), reports (for the project), src (for relevant python scripts) and tests (for pytests) folders according to the standard. However, we have removed the notebooks folder as the project doesn't involve any. Furthermore, doing development of our framework we added a data/test_data folder for a subset of our dataset.
+We've filled out the data folder(split into raw, which is downloaded from a gcp bucket,and afterwards processed), dockerfiles (containing the dockerfiles used in this project), reports (for the project), src (for relevant python scripts) and tests (for pytests) folders according to the standard. However, we have removed the notebooks folder as the project doesn't involve any. Models are saved in a gcp bucket. Furthermore, doing development of our framework we added a data/test_data folder for a subset of our dataset.
 
 todo: delete unused folders and update this (103 words)
 
@@ -430,7 +430,7 @@ Although we didn't profile our code, doing so would have been beneficial to iden
 >
 > Answer:
 
-We used Compute Engine, Artifact Registry, and Cloud Build in our project. Compute Engine is used to create and run virtual machines, giving us a separate environment to work with. Artifact Registry is used for building and storing container images. We also used Cloud Build to automate the process of building and deploying containers, which streamlined our workflow.
+We used Compute Engine, Artifact Registry, Bucket and Cloud Build in our project. Compute Engine is used to create and run virtual machines, giving us a separate environment to work with. Artifact Registry is used for building and storing container images. Bucket is for cloud storage. We also used Cloud Build to automate the process of building and deploying containers, which streamlined our workflow. 
 
 ### Question 18
 
@@ -454,7 +454,8 @@ We started off using the compute engine to train our models. Here we started off
 >
 > Answer:
 
-![Bucket](figures/bucket.png)
+![Bucket](figures/list_of_buckets.png)
+![Bucket](figures/databucket.png)
 
 ### Question 20
 
@@ -486,7 +487,7 @@ We started off using the compute engine to train our models. Here we started off
 >
 > Answer:
 
-As mentioned earlier we managed to get everything set up to train our model in the cloud using the Google Compute Engine application - although we did not manage to get GPU support working as we did not have time to get propper permissions from Google to use the GPU ressources. To get our model set up using the Google Compute engine, we started off by by first dockerizing our application. Here we included steps to download and tokenize our data. As our data could be downloaded in the cloud we did not keep it in a cloud. To dockerize our data we used the Google Cloud build application, by preparing the cloudbuild.yaml found in our repository. We then open up a VM on the Google Compute Engine and ssh'ed into the VM. Here we set up docker and pulled the dockerized application from the google artifacts registry - and trained the model. But due to the lack of GPU support we did give the model time enough to finish training and instead used theHPC system at dtu for training the model.
+As mentioned earlier we managed to get everything set up to train our model in the cloud using the Google Compute Engine application - although we did not manage to get GPU support working as we did not have time to get propper permissions from Google to use the GPU ressources. To get our model set up using the Google Compute engine, we started off by by first dockerizing our application. Here we included steps to download and tokenize our data. We downloaded our data from OPUS, and stored it in a bucket. To dockerize our data we used the Google Cloud build application, by preparing the cloudbuild.yaml found in our repository. We then open up a VM on the Google Compute Engine and ssh'ed into the VM. Here we set up docker and pulled the dockerized application from the google artifacts registry - and trained the model. But due to the lack of GPU support we did give the model time enough to finish training and instead used theHPC system at dtu for training the model.
 
 ## Deployment
 
@@ -589,7 +590,7 @@ We ended up all using the same project on the Google Cloud Platform - we just ad
 >
 > Answer:
 
---- question 28 fill here ---
+We implemented a frontend for our API using Streamlit. This decision was made to provide an interactive and user-friendly interface for presenting our translator model. Streamlit was a quick and efficient way to develop the frontend, allowing us to focus on showcasing the model's capabilities without spending excessive time on frontend development.
 
 ### Question 29
 
@@ -605,20 +606,26 @@ We ended up all using the same project on the Google Cloud Platform - we just ad
 >
 > Answer:
 
---- question 29 fill here ---
+![Overview](figures/overview.png)
 
 The developer begins by cloning the GitHub repository to work on the project. The repository is configured with GitHub Actions to automate workflows, including code format checks, pre-commit validations, and test execution, enabling continuous integration and minimizing the risk of committing errors.
 
-The Makefile provides streamlined commands to facilitate project tasks:
+The `Makefile` provides streamlined commands to facilitate project tasks:
 
-1. Run ```make setup_data``` to retrieve and process the required data. The data is collected from Huggingface
-2. Use ```make tests``` to execute tests and ensure code integrity.
-3. Use ```make train``` to train the model. The model is also collected from Huggingface
+1. Run `make setup_data` to retrieve and process the required data. The data is collected from Huggingface.
+2. Use `make tests` to execute tests and ensure code integrity.
+3. Use `make train` to train the model. The model is also collected from Huggingface.
+4. Use `make build_cloud` to build the Docker image and push it to the Google Cloud Artifact Registry.
+5. Use `make run_streamlit` to launch the Streamlit frontend locally.
+6. Use `make start_backend_and_frontend` to run both the FastAPI backend and Streamlit frontend simultaneously.
+7. Use `make build_docker_api` to build the Docker image for the FastAPI backend.
+8. Use `make run_docker_api_locally` to run the FastAPI backend locally using Docker.
+9. Use `make api_build_cloud` and `make frontend_build_cloud` to build and deploy the backend and frontend to Google Cloud.
+10. Use `make download_model` to download the trained model from Google Cloud Storage.
 
-To build the Docker image, run make build_cloud, which constructs the Docker image and pushes it to the Google Cloud Artifact Registry. Once the image is available, a Google Compute Engine VM instance can be launched to train the model. The training process automatically logs results and stores the model on Weights & Biases (WandB).
+To build the Docker image, run `make build_cloud`, which constructs the Docker image and pushes it to the Google Cloud Artifact Registry. Once the image is available, a Google Compute Engine VM instance can be launched to train the model. The training process automatically logs results and stores the model on Weights & Biases (WandB).
 
-For end users, the workflow involves cloning the GitHub repository and initializing the API. The API allows users to translate Danish sentences into English using the deployed model, which runs on Google Cloud infrastructure.
-
+For the end user, the model can be used through the API that runs on Google Engine. If the user wants to run the model locally, the repo can be cloned and make run_docker_api_locally can be run. 
 
 ### Question 30
 
