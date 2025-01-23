@@ -606,6 +606,8 @@ We ended up all using the same project on the Google Cloud Platform - we just ad
 
 ![Overview](figures/overview.png)
 
+![Workflow](figures/workflow.png)
+
 The developer begins by cloning the GitHub repository to work on the project. The repository is configured with GitHub Actions to automate workflows, including code format checks, pre-commit validations, and test execution, enabling continuous integration and minimizing the risk of committing errors.
 
 The `Makefile` provides streamlined commands to facilitate project tasks:
