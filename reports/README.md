@@ -519,8 +519,10 @@ We wrote and API for our model, using FastAPI. We made a simple api containing o
 > *`curl -X POST -F "file=@file.json"<weburl>`*
 >
 > Answer:
+
 We deployed our API both locally and in the cloud. Firstly we tested the model locally, and later we then deployed it to the cloud. For deploying the model in the cloud we dockerized the application and then used the the Google Cloud build to build the container and push the container to the artifact repository. We then used Cloud Run to deploy our containermaking sure that it exposed port 8080. The API for our model can be called with curl by:  
 ```
+
 ```
 This would then translate the sentence "hej med dig" to english. 
 
@@ -537,7 +539,7 @@ This would then translate the sentence "hej med dig" to english.
 >
 > Answer:
 
---- question 25 fill here ---
+We did not manage to implement any unit testing or load testing for our API. However, if we were to implement this, we would have follow the M24 module in this course. For integration testing we would have installed httpx and fastapi.testclient to write relevant tests for functionality (for instance, assert that the api returns an actual translation, which could be to assert that the translation model does not return an empty string). Furthermore, for load testing we would have installed locust, the load-testing tool introtduced in this course, which simulates multiple users interacting with the API. We would do this in order to test the performance of our application, and what max capacity is.
 
 ### Question 26
 
