@@ -13,8 +13,9 @@ COPY requirements_dev.txt requirements_dev.txt
 COPY README.md README.md
 COPY pyproject.toml pyproject.toml
 COPY Makefile Makefile
-COPY models models
-COPY models/model.pt models/model.pt
+COPY models models/
+
+
 
 
 # RUN pip install -r requirements.txt --no-cache-dir --verbose
